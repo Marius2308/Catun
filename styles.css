@@ -1641,7 +1641,8 @@ body[data-page="catalogue"] {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-bottom: clamp(20px, 3vh, 36px);
+  /* More breathing room below the bottle before the text block starts */
+  margin-bottom: clamp(28px, 4vh, 48px);
 }
 .shop-item__bottle .wine-bottle,
 .shop-item__bottle .bottle-fallback {
@@ -1661,7 +1662,9 @@ body[data-page="catalogue"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  /* Spacing is owned per-element below for a clean, predictable hierarchy
+     (year+name+varietal grouped tight, price + button clearly separated). */
+  gap: 0;
   max-width: 320px;
 }
 .shop-item__vintage {
@@ -1670,13 +1673,13 @@ body[data-page="catalogue"] {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0.7;
-  margin: 0;
+  margin: 0 0 var(--space-2);
 }
 .shop-item__name {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-  line-height: 1;
+  line-height: 1.05;
   margin: 0;
   letter-spacing: -0.01em;
 }
@@ -1685,7 +1688,7 @@ body[data-page="catalogue"] {
   font-size: 0.86rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin: 0;
+  margin: var(--space-3) 0 0;
   opacity: 0.78;
 }
 .shop-item__tasting {
@@ -1700,7 +1703,8 @@ body[data-page="catalogue"] {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.5rem;
-  margin: var(--space-2) 0 0;
+  /* Clear separation from the varietal above */
+  margin: var(--space-5) 0 0;
   font-variant-numeric: tabular-nums;
 }
 .shop-item__actions {
@@ -1708,7 +1712,8 @@ body[data-page="catalogue"] {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-3);
-  margin-top: var(--space-3);
+  /* Sits clearly below the price; column layout means it can never overlap text */
+  margin-top: var(--space-5);
 }
 
 /* ---- Feature variant: larger bottle, more breathing room ---- */
