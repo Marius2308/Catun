@@ -375,23 +375,26 @@
     // ---- Vinuri Rosii ----
     {
       id: "ciuleandra", name: "Ciuleandra", type: "rosu", typeLabel: "Vin Rosu",
+      varietal: "Merlot",
       collection: "vinuri-rosii", image: "assets/wines/ciuleandra.png",
-      vintage: 2021, price: 38,
+      vintage: 2019, price: 12,
       tasting: "Cherries kept under oak — pepper, dried herbs, a long stoney finish.",
       notes: "Hand-harvested from the upper hillside rows. Fermented in open vats and rested 18 months in old oak. A red built for slow Sunday tables.",
       badge: "new"
     },
     {
       id: "pe-cal-alb", name: "Pe Cal Alb", type: "rosu", typeLabel: "Vin Rosu",
+      varietal: "Merlot",
       collection: "vinuri-rosii", image: "assets/wines/pe-cal-alb.png",
-      vintage: 2020, price: 42,
+      vintage: 2018, price: 15,
       tasting: "Bold plum and warm spice — a country-table red with a velvet finish.",
       notes: "Old-vine selection from stony soil. Long maceration, gentle oak, bottled unfiltered. Best decanted an hour before pouring."
     },
     {
       id: "viata-lunga", name: "Viata Lunga", type: "rosu", typeLabel: "Vin Rosu",
+      varietal: "Cabernet Sauvignon",
       collection: "vinuri-rosii", image: "assets/wines/viata-lunga.png",
-      vintage: 2019, price: 48,
+      vintage: 2019, price: 13,
       tasting: "Cellar-aged depth — dark berry, leather, slow earth.",
       notes: "Aged four years in the stone cellar before release. A keeper — drinking well now and through the decade.",
       badge: "limited"
@@ -399,16 +402,18 @@
     // ---- Vinuri Albe ----
     {
       id: "regina-vinului", name: "Regina Vinului", type: "alb", typeLabel: "Vin Alb",
+      varietal: "Muscat Ottonel",
       collection: "vinuri-albe", image: "assets/wines/regina-vinului.png",
-      vintage: 2023, price: 36,
+      vintage: 2019, price: 18,
       tasting: "Orchard fruit, crisp stone, a late-sun glow on the finish.",
       notes: "Cool-fermented in stainless, six months on fine lees. Pours pale gold; drinks bright and long. The queen of the cellar's white range."
     },
     // ---- Vinuri Rose ----
     {
       id: "amintiri", name: "Amintiri", type: "rose", typeLabel: "Vin Rose",
+      varietal: "Cabernet Sauvignon",
       collection: "vinuri-rose", image: "assets/wines/amintiri.png",
-      vintage: 2023, price: 32,
+      vintage: 2019, price: 16,
       tasting: "Soft blush, garden roses, dry warm finish. A memory in a glass.",
       notes: "Picked early at first light, pressed gently, fermented cool. Light pink, dry, low alcohol — a porch wine with a long memory."
     }
@@ -476,13 +481,11 @@
       );
       var info = (
         '<div class="shop-item__info">' +
-        '<p class="shop-item__vintage">Vintage ' + esc(p.vintage) + "</p>" +
+        '<p class="shop-item__vintage">' + esc(p.vintage) + "</p>" +
         '<h3 class="shop-item__name">' + esc(p.name) + "</h3>" +
-        '<p class="shop-item__type">' + esc(p.typeLabel) + "</p>" +
-        (variant === "feature" ? '<p class="shop-item__tasting">' + esc(p.tasting || "") + "</p>" : "") +
-        '<p class="shop-item__price">$' + esc(p.price) + "</p>" +
+        '<p class="shop-item__type">' + esc(p.varietal || p.typeLabel) + "</p>" +
+        '<p class="shop-item__price">€ ' + esc(p.price) + "</p>" +
         '<div class="shop-item__actions">' +
-        '<button class="pill pill--ghost" type="button" data-quick-open="' + esc(p.id) + '">Quick view</button>' +
         '<button class="pill pill--solid" type="button" data-add="' + esc(p.id) + '"' + (sold ? " disabled" : "") + ">" + esc(addLabel) + "</button>" +
         "</div></div>"
       );
@@ -558,7 +561,7 @@
         qvTitle.textContent = wine.name;
         qvMeta.textContent = wine.tasting || "";
         qvNotes.textContent = wine.notes || "";
-        qvPrice.textContent = "$" + wine.price;
+        qvPrice.textContent = "€ " + wine.price;
         if (qvAdd) {
           qvAdd.disabled = wine.badge === "sold-out";
           qvAdd.textContent = wine.badge === "sold-out" ? "Sold out" : "Add to cart";
