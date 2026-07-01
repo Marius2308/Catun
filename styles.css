@@ -1,0 +1,2538 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap");
+
+/* =========================================================================
+   DESIGN TOKENS — PLACEHOLDER ONLY. Single source of truth for branding.
+   Swap these to rebrand; nothing below hardcodes brand values.
+   ========================================================================= */
+:root {
+  /* ---- Brand / UI colours ---- */
+  --c-ink: #2c2018;
+  --c-muted: #6f6052;
+  --c-paper: #f4ead8;
+  --c-surface: #fbf4e7;
+  --c-line: #e1d2ba;
+  --c-accent: #6e2436; /* wine / bordeaux */
+  --c-accent-soft: #883246;
+  --c-gold: #d9b25a;
+
+  /* ---- Scene 1: village / vineyard (golden hour) ---- */
+  --c-sky1-top: #b9d2da;
+  --c-sky1-mid: #f5e3bd;
+  --c-sky1-low: #f1d2a0;
+  --c-sun: #ffe7b3;
+  --c-hill-far: #b7c4a6;
+  --c-hill-mid: #9db188;
+  --c-field-left: #889a57;
+  --c-field-right: #94a564;
+  --c-road: #cdb487;
+  --c-road-crown: #dcc6a0;
+  --c-row: #6f7d45;
+  --c-bush: #5f6f3a;
+  --c-cypress: #4f6138;
+  --c-bark: #6b4a30;
+  --c-stone: #cdbfa6;
+  --c-stone-dark: #b3a283;
+  --c-water: #cfe3e0;
+  --c-white: #f4efe6;
+  --c-beak: #d98a3a;
+  --c-leaf-fg: #46562f;
+
+  /* ---- Scene 2: house / cellar entrance (day) ---- */
+  --c-sky2-top: #aacfe0;
+  --c-sky2-low: #e9f1ec;
+  --c-ground: #8fa257;
+  --c-dirt: #c7b083;
+  --c-wall: #ead9bd;
+  --c-roof: #b0563b;
+  --c-roof-dark: #8f4530;
+  --c-glass: #6f8ea3;
+  --c-wood: #7b5836;
+  --c-wood-dark: #5e4226;
+  --c-chimney: #c08a6a;
+  --c-mulberry: #4d6b3f;
+  --c-mulberry-fruit: #5b2a4a;
+  --c-quince: #6f8a4a;
+  --c-quince-fruit: #e3b53f;
+  --c-cellar-earth: #8a7a55;
+  --c-cellar-dark: #241710;
+  --c-fence: #875a34;
+  --c-fence-dark: #6c4527;
+  --c-swallow: #2f2a26;
+
+  /* ---- Scene 3: interior cellar (warm dark) ---- */
+  --c-cellar-wall: #271c14;
+  --c-vault: #3a2a1e;
+  --c-vault-inner: #4c3727;
+  --c-floor: #1c130d;
+  --c-floor-2: #2a1d14;
+  --c-oak: #6e4a2c;
+  --c-oak-light: #855b34;
+  --c-hoop: #caa75e;
+  --c-rack: #5a3d24;
+  --c-bottle-end: #2f4a3a;
+  --c-glow: rgba(255, 190, 110, 0.55);
+  --c-flame: #ffcf7a;
+  --c-cream: #f1e7d6;
+  --c-amber: #e0b574;
+
+  /* ---- Bottle teaser / type colours ---- */
+  --c-type-red: #6e2436;
+  --c-type-white: #cdbf7d;
+  --c-type-rose: #d98aa0;
+  --c-type-sparkling: #335041;
+
+  /* ---- Type ---- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---- Spacing ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* ---- Radius ---- */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 3px rgba(44, 32, 24, 0.12);
+  --shadow-md: 0 8px 24px rgba(44, 32, 24, 0.16);
+  --shadow-lg: 0 22px 60px rgba(44, 32, 24, 0.28);
+
+  /* ---- Motion ---- */
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 620ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ---- Layout ---- */
+  --header-h: 76px;
+  --container: 1200px;
+
+  /* ---- Section background gradients ---- */
+  --bg-sky1: linear-gradient(180deg, var(--c-sky1-top) 0%, var(--c-sky1-mid) 58%, var(--c-sky1-low) 100%);
+  --bg-sky2: linear-gradient(180deg, var(--c-sky2-top) 0%, var(--c-sky2-low) 100%);
+  --bg-cellar: radial-gradient(120% 90% at 50% 28%, #3a2a1d 0%, #241811 55%, #160e09 100%);
+}
+
+/* =========================================================================
+   RESET / BASE
+   ========================================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-body);
+  color: var(--c-ink);
+  background: var(--c-paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img,
+svg {
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+}
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+  background: var(--c-accent);
+  color: var(--c-white);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================================
+   TYPOGRAPHY HELPERS
+   ========================================================================= */
+.eyebrow {
+  font-size: clamp(0.7rem, 1.4vw, 0.8rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent);
+  margin-bottom: var(--space-4);
+}
+.eyebrow--dark {
+  color: var(--c-accent);
+}
+.eyebrow--light {
+  color: var(--c-amber);
+}
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 6.4vw, 5.2rem);
+  color: var(--c-ink);
+  text-shadow: 0 2px 18px rgba(244, 234, 216, 0.5);
+}
+.display-title--light {
+  color: var(--c-cream);
+  text-shadow: 0 4px 26px rgba(0, 0, 0, 0.5);
+}
+.lede {
+  max-width: 34ch;
+  margin-top: var(--space-5);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--c-muted);
+}
+.lede--dark {
+  color: var(--c-ink);
+}
+.lede--light {
+  color: rgba(241, 231, 214, 0.86);
+}
+/* Hero meta line — small uppercase tracking, sits tight under the subtitle.
+   One line on desktop; wraps cleanly on phones. (Homepage S1 hero.) */
+.hero-meta {
+  margin-top: var(--space-3); /* smaller gap than title→subtitle, groups it with the subtitle */
+  font-size: clamp(0.62rem, 1vw, 0.72rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(241, 231, 214, 0.72);
+  white-space: nowrap; /* keep on one line on desktop */
+}
+@media (max-width: 760px) {
+  .hero-meta { white-space: normal; }
+}
+
+/* =========================================================================
+   BUTTONS
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.8em 1.5em;
+  transition: transform var(--dur-fast) var(--ease),
+    background-color var(--dur-base) var(--ease), color var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn--lg {
+  padding: 1em 1.8em;
+  font-size: 1.02rem;
+}
+.btn__icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.btn--primary {
+  background: var(--c-accent);
+  color: var(--c-white);
+  box-shadow: var(--shadow-md);
+}
+.btn--primary:hover {
+  background: var(--c-accent-soft);
+}
+.btn--ghost-light {
+  border: 1.5px solid rgba(241, 231, 214, 0.55);
+  color: var(--c-cream);
+}
+.btn--ghost-light:hover {
+  background: rgba(241, 231, 214, 0.12);
+  border-color: var(--c-cream);
+}
+
+/* =========================================================================
+   HEADER + MENU
+   ========================================================================= */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  transition: background-color var(--dur-base) var(--ease),
+    backdrop-filter var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.site-header.is-scrolled {
+  background: rgba(244, 234, 216, 0.82);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+}
+.header-inner {
+  height: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+}
+.menu-toggle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(44, 32, 24, 0.25);
+  display: grid;
+  place-items: center;
+  background: rgba(251, 244, 231, 0.5);
+  transition: background-color var(--dur-base) var(--ease), transform var(--dur-fast) var(--ease);
+  justify-self: start;
+}
+.menu-toggle:hover {
+  background: var(--c-surface);
+  transform: scale(1.04);
+}
+.menu-toggle__bars,
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--c-ink);
+  border-radius: 2px;
+  transition: transform var(--dur-base) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+.menu-toggle__bars::before {
+  transform: translateY(-6px);
+}
+.menu-toggle__bars::after {
+  transform: translateY(4px);
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars {
+  background: transparent;
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars::before {
+  transform: translateY(0) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars::after {
+  transform: translateY(-2px) rotate(-45deg);
+}
+.brand {
+  justify-self: center;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.brand__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--c-ink);
+}
+.brand__tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.header-icons {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  display: grid;
+  place-items: center;
+  position: relative;
+  transition: background-color var(--dur-base) var(--ease);
+}
+.icon-btn:hover {
+  background: rgba(44, 32, 24, 0.08);
+}
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--c-ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cart-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent);
+  color: var(--c-white);
+  font-size: 0.62rem;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+}
+
+/* Menu overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: linear-gradient(160deg, #2b1d15 0%, #43271f 100%);
+  color: var(--c-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease);
+}
+.menu-overlay[hidden] {
+  display: none;
+}
+.menu-overlay.is-open {
+  opacity: 1;
+}
+.menu-overlay__nav {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-3), 2.4vh, var(--space-5));
+  text-align: center;
+}
+.menu-overlay__nav a {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-weight: 600;
+  color: var(--c-cream);
+  opacity: 0.9;
+  transition: color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+.menu-overlay__nav a:hover {
+  color: var(--c-gold);
+  transform: translateX(6px);
+}
+.menu-num {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--c-amber);
+  margin-right: var(--space-3);
+  vertical-align: middle;
+}
+.menu-overlay__note {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(241, 231, 214, 0.5);
+}
+
+/* =========================================================================
+   SCROLL DOTS
+   ========================================================================= */
+.scroll-dots {
+  position: fixed;
+  right: clamp(0.6rem, 2vw, 1.8rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(44, 32, 24, 0.55);
+  transition: background-color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease);
+}
+.dot.is-active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  transform: scale(1.25);
+}
+.dot__label {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  background: rgba(251, 244, 231, 0.9);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+.dot:hover .dot__label,
+.dot.is-active .dot__label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+/* dots on the dark cellar section */
+.scroll-dots.on-dark .dot {
+  border-color: rgba(241, 231, 214, 0.6);
+}
+.scroll-dots.on-dark .dot.is-active {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+}
+.scroll-dots.on-dark .dot__label {
+  color: var(--c-cream);
+  background: rgba(40, 26, 18, 0.85);
+}
+
+/* =========================================================================
+   SCENES — shared
+   ========================================================================= */
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  overflow: hidden;
+  isolation: isolate;
+}
+.scene__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+.scene--village .scene__sky {
+  background: var(--bg-sky1);
+}
+.scene__sky--day {
+  background: var(--bg-sky2);
+}
+.scene__sun {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42vw;
+  height: 42vw;
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-sun) 0%, rgba(255, 231, 179, 0) 65%);
+  z-index: -2;
+}
+.scene__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.scene__leaves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+.scene__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Real client image layers (integrated assets) ---- */
+.scene__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+}
+/* Legibility veils so text reads over the painted photos */
+.scene__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.scene__veil--village {
+  /* darkest band aligned with the vertically-centred hero copy. A soft radial deepens
+     ONLY the central text zone (so CĂTUN/subtitle have a contrast floor) while the edges
+     keep the lighter linear wash — the vineyard stays bright and visible. */
+  background:
+    radial-gradient(58% 42% at 50% 45%,
+      rgba(18, 12, 8, 0.26) 0%,
+      rgba(18, 12, 8, 0.10) 46%,
+      rgba(18, 12, 8, 0) 70%),
+    linear-gradient(
+      180deg,
+      rgba(18, 12, 8, 0.55) 0%,
+      rgba(18, 12, 8, 0.3) 28%,
+      rgba(18, 12, 8, 0.34) 55%,
+      rgba(18, 12, 8, 0.62) 100%
+    );
+}
+.scene__veil--cellar {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.64) 0%,
+    rgba(0, 0, 0, 0.24) 46%,
+    rgba(0, 0, 0, 0) 72%
+  );
+}
+/* Section 2 keeps dark text → light scrim gives it a contrast floor (not just text-shadow) */
+.scene__veil--house {
+  background: linear-gradient(
+    180deg,
+    rgba(247, 239, 225, 0.6) 0%,
+    rgba(247, 239, 225, 0.32) 24%,
+    rgba(247, 239, 225, 0) 48%
+  );
+}
+/* Section 1 sits on a bright painting → switch hero text to light */
+.scene--village .eyebrow {
+  color: var(--c-amber);
+  text-shadow:
+    0 1px 3px rgba(28, 16, 10, 0.70),
+    0 2px 10px rgba(28, 16, 10, 0.45);
+}
+.scene--village .display-title {
+  color: var(--c-cream);
+  /* layered: tight dark-brown separation → mid diffuse → wide ambient depth → faint warm
+     halo for a premium lift (no hard outline, no glow-y cartoon). */
+  text-shadow:
+    0 2px 4px   rgba(28, 16, 10, 0.55),
+    0 4px 16px  rgba(24, 14, 9, 0.45),
+    0 10px 38px rgba(18, 11, 7, 0.35),
+    0 0 34px    rgba(255, 198, 122, 0.12);
+}
+.scene--village .lede {
+  color: rgba(241, 231, 214, 0.94);
+  text-shadow:
+    0 1px 3px  rgba(28, 16, 10, 0.62),
+    0 2px 12px rgba(24, 14, 9, 0.42);
+}
+.scene--village .hero-meta {
+  text-shadow:
+    0 1px 3px  rgba(28, 16, 10, 0.62),
+    0 2px 10px rgba(24, 14, 9, 0.42);
+}
+.scene--village .scroll-arrow {
+  color: var(--c-cream);
+  /* soft brown drop-shadow keeps both the word and the chevron legible over the bright road */
+  filter: drop-shadow(0 1px 3px rgba(20, 12, 8, 0.55));
+  /* fade the scroll cue out as the vineyard→house transition begins, so the rising wave never reaches it */
+  opacity: calc(1 - max(var(--village-to-house) - 0.1, 0) * 3);
+}
+/* CTA: same accent/style, just a slightly stronger lift off the busy vineyard (village hero only) */
+.scene--village .btn--primary {
+  box-shadow:
+    var(--shadow-md),
+    0 6px 22px rgba(20, 12, 8, 0.40);
+}
+/* Section 2 keeps dark text (bright sky/blossoms) → crisp light halo for legibility */
+.scene--house .eyebrow {
+  text-shadow: 0 1px 2px rgba(244, 234, 216, 0.9);
+}
+.scene--house .display-title {
+  text-shadow: 0 1px 2px rgba(244, 234, 216, 0.95), 0 3px 22px rgba(244, 234, 216, 0.7);
+}
+.scene--house .lede {
+  color: var(--c-ink);
+  text-shadow: 0 1px 2px rgba(244, 234, 216, 0.92);
+}
+
+/* Decorative swallows — Section 2 only. Painted PNG asset used twice, second mirrored.
+   Anchored in the upper corners of the sky, clear of the centered title. opacity + swoop
+   translate driven by --village-to-house (set by initScrollJourney during S1→S2 entry):
+   birds fade in and slide from off-corner into rest as Section 2 arrives. z:1 sits BEHIND
+   the text/fence (z:3) and ABOVE sky/photo/veil. Inside .s2-stage in HTML → hide with
+   the stage at the S2→S3 release. */
+.s2-bird {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+  user-select: none;
+  opacity: clamp(0, var(--village-to-house, 0), 1);
+  will-change: opacity, transform;
+}
+.s2-bird--a {
+  top: 12%;
+  left: 7%;
+  width: clamp(40px, 4.4vw, 64px);
+  transform:
+    translate(
+      calc((1 - var(--village-to-house, 0)) * -56px),
+      calc((1 - var(--village-to-house, 0)) * -28px)
+    )
+    rotate(calc((1 - var(--village-to-house, 0)) * -8deg));
+}
+.s2-bird--b {
+  top: 9%;
+  right: 8%;
+  width: clamp(44px, 5vw, 72px);
+  /* scaleX(-1) mirrors the asset; the translate(-X) then visually moves +X so the bird
+     enters from the upper-RIGHT and settles into its anchored position. */
+  transform:
+    scaleX(-1)
+    translate(
+      calc((1 - var(--village-to-house, 0)) * -60px),
+      calc((1 - var(--village-to-house, 0)) * -32px)
+    )
+    rotate(calc((1 - var(--village-to-house, 0)) * -8deg));
+}
+/* Mobile: narrow viewport, centered title spans nearly the full width — corners are too
+   tight for the birds to read cleanly. Hide them. */
+@media (max-width: 760px) {
+  .s2-bird { display: none; }
+}
+
+.scene__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  flex-direction: column;
+}
+.scene__content--center {
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  padding-top: var(--header-h);
+}
+.scene__content--top {
+  align-self: flex-start;
+  align-items: center;
+  text-align: center;
+  margin-top: calc(var(--header-h) + 5vh);
+}
+/* S2 editorial story block — quiet, centered in the upper-middle, between the corner birds and
+   above the fence/gate. Padding is zeroed so max-width is a clean text measure (~50ch); margin
+   auto centers it. Scoped to --story so the locked S2→S3 reveal preview (--cellar) and S3 are
+   untouched. */
+.scene__content--story {
+  align-items: center;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: min(50ch, 88vw);
+  margin-left: auto;
+  margin-right: auto;
+}
+.scene__content--story .display-title {
+  width: 100%;
+  font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-wrap: balance; /* even line lengths; the title's nbsp keeps breaks at sentence boundaries */
+}
+.scene__content--story .lede {
+  width: 100%;
+  max-width: 100%; /* body paragraphs fill the editorial measure, wider than the default 34ch */
+  /* tight + soft cream halo lifts the dark copy off the varied photo (tree/house) without
+     darkening the image — readability only, S2 story block scoped. */
+  text-shadow:
+    0 1px 2px  rgba(247, 239, 225, 0.95),
+    0 1px 14px rgba(247, 239, 225, 0.55);
+}
+.scene__content--cellar {
+  align-self: center;
+  align-items: flex-start;
+  text-align: left;
+  max-width: min(920px, 92vw); /* wider so the two title lines can spread horizontally */
+  margin-right: auto;
+}
+/* Title spans stack as two lines; each stays on one line on desktop so the title reads wide,
+   not stacked/vertical. (Mobile allows natural wrapping — see the max-width:760px block.) */
+.scene__content--cellar .display-title span {
+  display: block;
+  white-space: nowrap;
+}
+/* Body stays at a comfortable reading measure even though the block is wider for the title. */
+.scene__content--cellar .lede {
+  max-width: 48ch;
+}
+.scene__content .btn {
+  margin-top: var(--space-6);
+}
+
+/* Scroll arrow */
+.scroll-arrow {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--c-ink);
+}
+.scroll-arrow__word {
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.scroll-arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: bob 1.8s var(--ease) infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* =========================================================================
+   SCENE 1 — VILLAGE / VINEYARD
+   ========================================================================= */
+.v-hill--far { fill: var(--c-hill-far); }
+.v-hill--mid { fill: var(--c-hill-mid); }
+.v-field--left { fill: var(--c-field-left); }
+.v-field--right { fill: var(--c-field-right); }
+.v-road { fill: var(--c-road); }
+.v-road-crown { fill: var(--c-road-crown); }
+.v-rows line {
+  stroke: var(--c-row);
+  stroke-width: 3;
+  opacity: 0.5;
+}
+.v-bushes circle { fill: var(--c-bush); }
+.v-cypress ellipse { fill: var(--c-cypress); }
+.v-trunk { fill: var(--c-bark); }
+.v-fountain-post { fill: var(--c-stone-dark); }
+.v-fountain-spout { fill: var(--c-stone-dark); }
+.v-fountain-basin { fill: var(--c-stone); stroke: var(--c-stone-dark); stroke-width: 3; }
+.v-fountain-water { fill: none; stroke: var(--c-water); stroke-width: 4; stroke-linecap: round; }
+.v-stork-body { fill: var(--c-white); }
+.v-stork-head { fill: var(--c-white); }
+.v-stork-neck { fill: none; stroke: var(--c-white); stroke-width: 6; stroke-linecap: round; }
+.v-stork-beak { fill: var(--c-beak); }
+.v-stork-leg { stroke: var(--c-beak); stroke-width: 3; stroke-linecap: round; }
+.fg-leaf { fill: var(--c-leaf-fg); }
+.fg-stem { fill: none; stroke: var(--c-leaf-fg); stroke-width: 5; opacity: 0.8; }
+.fg-vine { opacity: 0.92; }
+
+/* =========================================================================
+   SCENE 2 — HOUSE / CELLAR ENTRANCE
+   ========================================================================= */
+.swallows {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.swallow {
+  position: absolute;
+  width: 38px;
+  height: 19px;
+  fill: none;
+  stroke: var(--c-swallow);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.swallow--1 { top: 18%; left: -8%; animation: fly1 14s linear infinite; }
+.swallow--2 { top: 26%; left: -8%; width: 28px; animation: fly1 18s linear infinite 3s; }
+.swallow--3 { top: 14%; left: -8%; width: 22px; animation: fly1 22s linear infinite 7s; }
+@keyframes fly1 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(60vw, -4vh); }
+  100% { transform: translate(120vw, 2vh); }
+}
+.h-ground { fill: var(--c-ground); }
+.h-path { fill: var(--c-dirt); }
+.tree-trunk { fill: var(--c-bark); }
+.mulberry-foliage { fill: var(--c-mulberry); }
+.mulberry-fruit circle { fill: var(--c-mulberry-fruit); }
+.quince-foliage { fill: var(--c-quince); }
+.quince-fruit circle { fill: var(--c-quince-fruit); stroke: #b8902a; stroke-width: 1.5; }
+.house-roof { fill: var(--c-roof); }
+.house-roof-shadow { fill: var(--c-roof-dark); }
+.house-wall { fill: var(--c-wall); }
+.house-window { fill: var(--c-glass); }
+.house-window-bar { stroke: var(--c-wood-dark); stroke-width: 4; }
+.house-door { fill: var(--c-wood); }
+.house-knob { fill: var(--c-gold); }
+.chimney { fill: var(--c-chimney); }
+.cellar-mound { fill: var(--c-cellar-earth); }
+.cellar-arch { fill: var(--c-stone); }
+.cellar-dark { fill: var(--c-cellar-dark); }
+.cellar-door { fill: var(--c-wood); stroke: var(--c-wood-dark); stroke-width: 2; }
+.cellar-plank { stroke: var(--c-wood-dark); stroke-width: 2; }
+.cellar-step { fill: var(--c-stone-dark); }
+.cart-bed, .cart-rail { fill: var(--c-wood); }
+.cart-slat, .cart-handle { stroke: var(--c-wood); stroke-width: 6; stroke-linecap: round; }
+.cart-wheel { fill: var(--c-wood-dark); }
+.cart-wheel-hub { fill: var(--c-gold); }
+
+/* Parallax fence (separate foreground layer — real transparent cutout, capped to a bottom band) */
+.scene__fence {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8vh; /* cushion so the parallax lift never exposes a gap beneath the fence */
+  width: 100%;
+  height: clamp(340px, 52vh, 640px); /* taller band → more of the fence body reads, finials get headroom */
+  overflow: hidden;
+  z-index: 3;
+  pointer-events: none;
+  will-change: transform;
+}
+.scene__fence-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 52% balances top + body: with the taller container the slice spans ~27-75% of
+     the asset — small sky headroom so finials clear, then full finials + gate body +
+     grass (touch of dirt) for a strong, grounded foreground.
+     (Asset bands: transparent 0-31%, finials 32-48%, gate 48-64%, grass 64-73%.) */
+  object-position: center 52%;
+}
+/* Cellar atmosphere rising onto the fence — warm dark tint grows from the seam up
+   as S3 enters (driven by --house-to-cellar), fading out before the blue gate crown.
+   Inside .scene__fence so it's clipped to the fence and rides the parallax transform. */
+.scene__fence::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  /* multiply casts the cellar earth tone onto the blue fence as a real shadow
+     (darkens without graying), so the gate stays readable instead of washed flat */
+  mix-blend-mode: multiply;
+  /* Peak the cast shadow mid-transition, when the fence sits centred in view.
+     --house-to-cellar is only ~0.5 at that moment and doesn't hit 1 until the
+     fence has scrolled off the top — so ramp it: min(hc*2.2,1) reaches full
+     strength by the time the fence is centred, then holds while it exits. */
+  opacity: calc(min(var(--house-to-cellar) * 2.2, 1) * 0.9);
+  /* The cellar section overlaps and paints OVER the fence's lower ~half, so the
+     darkest shadow must land just above the seam (~mid-element), not at the true
+     element bottom (which is hidden). Strong band peaks at 48-58% then feathers
+     up the visible gate; colour sampled from the S3 cellar top (rgb(89,51,15)). */
+  background: linear-gradient(
+    to top,
+    rgba(34, 18, 8, 0.92) 0%,
+    rgba(40, 22, 9, 0.9) 42%,
+    rgba(54, 30, 12, 0.82) 54%,
+    rgba(77, 42, 18, 0.5) 66%,
+    rgba(89, 51, 15, 0.24) 78%,
+    rgba(89, 51, 15, 0) 88%
+  );
+}
+
+/* =========================================================================
+   S2→S3 FENCE-PULL PIN — Phase B1: real pin/stage boxes (still NO pin motion).
+   .s2-stage now carries Section 2's layout role (flex container + positioning
+   context + clip + stacking) that .scene used to provide, and is sticky-capable.
+   .s2-pin is the future scroll track; with --pin-extra:0 it is exactly one
+   viewport tall, so the stage has no room to stick → behaviour identical to
+   before. .scene--house drops its own flex/overflow (moved to the stage) and
+   must NOT clip, or it would trap the sticky stage. No fence lift / reveal yet.
+   ========================================================================= */
+.scene--house {
+  display: block;    /* override .scene's flex — S2's content now lives in .s2-stage */
+  overflow: visible; /* override .scene's overflow:hidden so it can't trap position:sticky */
+}
+.s2-pin {
+  position: relative;
+  min-height: calc(100svh + var(--pin-extra, 0vh)); /* B1: extra=0 → 100svh, no pin track yet */
+  --pin-extra: 0vh; /* Phase B2 knob: extra scroll distance for the pinned phase */
+}
+.s2-stage {
+  position: sticky;  /* sticky-capable; no track yet → sits in normal flow */
+  top: 0;
+  min-height: 100svh;  /* matches .scene's min-height:100svh */
+  display: flex;       /* replicate .scene flex so .scene__content--top positions identically */
+  overflow: hidden;    /* clip fence (-8vh) + photo masks, as .scene did */
+  isolation: isolate;  /* self-contained layer z-index stack, as .scene did */
+}
+.s2-reveal { display: none; } /* future cellar-reveal layer — still inactive */
+.s2-reveal-copy { display: none; } /* in-stage S3 text preview — desktop+motion only */
+
+/* B2a: activate the pin TRACK on desktop + motion-OK only (no fence lift / reveal yet).
+   The extra scroll distance gives .s2-stage room to actually stick → Section 2 holds
+   briefly near its bottom, then releases on continued scroll (native scroll, no jacking).
+   Mobile (≤760px) and reduced-motion keep --pin-extra:0 → no pin (normal-scroll fallback).
+   50vh keeps the S2 section ≤150vh, so its max intersection ratio (~0.67) stays above the
+   scroll-dots' 0.55 threshold and dot 2 still fires. */
+@media (min-width: 761px) and (prefers-reduced-motion: no-preference) {
+  .s2-pin { --pin-extra: 50vh; }
+
+  /* Phase C (corrected): PHYSICAL cellar reveal — not an opacity crossfade. The layer
+     is solid (opacity:1) and SAME s3-bg.webp cover/center crop as the real
+     #scene-cellar .scene__photo (so the pin-release handoff matches pixel-for-pixel).
+     z-index:2 sits ABOVE the S2 backdrop (sky/photo/veil/grain, z ≤ 1) so the house is
+     COVERED bottom-up (never faded), but BELOW the fence (z 3) so the lifting fence
+     drags the cellar up. A bottom-up mask wipes it open: the opaque band's top edge is
+     the reveal line, riding the fence ground-line via the eased --s2s3e. The feather
+     OVERSHOOTS — at --s2s3e:1 the opaque stop reaches the very top and the 7vh feather
+     sits off-screen above it → 100% cellar, no transparent top strip. At --s2s3e:0 the
+     whole feather is below the viewport → nothing shows (S2 identical at rest).
+     Activated here only → mobile/reduced-motion keep display:none and never render it. */
+  .s2-reveal {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden; /* clip the rising ::before image carrier */
+    opacity: 1; /* solid — this is a clip/mask reveal, not a crossfade */
+    -webkit-mask: linear-gradient(to top,
+      #000 calc(var(--s2s3e) * 100% + var(--s2s3e) * 7vh - 7vh),
+      transparent calc(var(--s2s3e) * 100% + var(--s2s3e) * 7vh));
+            mask: linear-gradient(to top,
+      #000 calc(var(--s2s3e) * 100% + var(--s2s3e) * 7vh - 7vh),
+      transparent calc(var(--s2s3e) * 100% + var(--s2s3e) * 7vh));
+    will-change: mask;
+  }
+  /* Image carrier: the cellar photo (same cover/center crop as the real #scene-cellar,
+     warm gradient fallback behind). It RISES with the fence — translated down at the
+     start and settling to 0 (cover/center = real cellar) at --s2s3e:1, on the same eased
+     curve as the fence lift, so the cellar feels physically dragged up. The top gap from
+     the downward shift always sits above the mask's reveal line, so no edge ever shows. */
+  .s2-reveal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("assets/s3-bg.webp") center / cover no-repeat, var(--bg-cellar);
+    transform: translateY(calc((1 - var(--s2s3e)) * 28vh));
+    will-change: transform;
+  }
+  /* Cellar mood — SOFTENED dark layers (scrim ~0.28, vignette ~0.30) so the warm bloom +
+     held lightspill read through as a continuous glow into the final cellar, not a darker
+     "settled" phase. White title's text-shadow keeps readability without a heavy scrim.
+     The real cellar's overlay below is matched 1:1 to these alphas → invisible swap. */
+  .s2-reveal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1; /* above the ::before image, within the masked reveal */
+    pointer-events: none;
+    background:
+      radial-gradient(60% 50% at 50% 34%, rgba(255, 196, 120, 0.14) 0%, rgba(0, 0, 0, 0) 60%),
+      /* matches the baked-in warm bloom on real #scene-cellar .scene__glow so the preview
+         and the final cellar share the permanent honey glow → invisible swap. */
+      radial-gradient(56% 46% at 50% 68%, rgba(255, 172, 86, 0.26) 0%, rgba(255, 146, 64, 0.08) 50%, rgba(255, 146, 64, 0) 75%),
+      /* bottom-left depth shadow — subtle, fades quickly so it only anchors the corner. */
+      radial-gradient(55% 65% at 0% 100%, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0.12) 40%, rgba(0, 0, 0, 0) 72%),
+      radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0) 60%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.10) 46%, rgba(0, 0, 0, 0) 72%);
+    opacity: clamp(0, (var(--s2s3) - 0.3) / 0.45, 1);
+  }
+
+  /* S2 copy sits BELOW the reveal (z2) and fence (z3) so the rising ground physically covers
+     it (no fade). At z1 it's still above photo/veil/grain → reads identically at rest. */
+  .scene--house .scene__content--top { z-index: 1; }
+
+  /* In-stage preview of the Section 3 copy. flex + inset:0 mimics .scene so the inner
+     .scene__content--cellar lands in the exact same spot as the real cellar copy. It
+     fades + slides in over --s2s3 0.65→0.85 — after the fence has cleared the text zone,
+     before the swap. At the .is-released swap the stage (and this preview) hide and the
+     real #scene-cellar copy (identical, coincident, opacity≈1) takes over → no jump. */
+  .s2-reveal-copy {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    z-index: 4; /* above the reveal (2); the fence (3) has lifted clear of the text by ~0.65 */
+    pointer-events: none;
+    opacity: clamp(0, (var(--s2s3) - 0.65) / 0.17, 1);
+    transform: translateY(calc((1 - clamp(0, (var(--s2s3) - 0.65) / 0.17, 1)) * 26px));
+    will-change: opacity, transform;
+  }
+  /* defeat the inherited .scene--house .scene__content S2-fade so the wrapper owns
+     visibility — 3 classes (0,3,0) beats that rule (0,2,0) regardless of source order. */
+  .s2-stage .s2-reveal-copy .scene__content { opacity: 1; transform: none; }
+  /* The container stays pointer-events:none (it must not intercept clicks during the
+     early lift while it is invisible). Re-enable just the CTA so it is clickable once
+     the preview has faded in during the S2→S3 transition — before the .is-released
+     handoff hands off to the identical real #scene-cellar CTA. Same catalogue.html
+     target either way, so the swap is seamless. */
+  .s2-stage .s2-reveal-copy .btn { pointer-events: auto; }
+}
+
+/* =========================================================================
+   SCENE 3 — INTERIOR CELLAR
+   ========================================================================= */
+.scene--cellar { color: var(--c-cream); }
+.scene__cellar-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background: var(--bg-cellar);
+}
+.c-wall { fill: var(--c-cellar-wall); }
+.c-vault { fill: var(--c-vault); }
+.c-vault-inner { fill: var(--c-vault-inner); }
+.c-stones line { stroke: rgba(241, 231, 214, 0.08); stroke-width: 2; }
+.c-floor { fill: var(--c-floor); }
+.c-floor-perspective { fill: var(--c-floor-2); }
+.c-lantern-cord { stroke: rgba(241, 231, 214, 0.3); stroke-width: 2; }
+.c-lantern-glow { fill: var(--c-glow); }
+.c-lantern rect { fill: var(--c-vault); stroke: var(--c-hoop); stroke-width: 1.5; }
+.c-lantern-flame { fill: var(--c-flame) !important; stroke: none !important; }
+.c-rack-frame { fill: none; stroke: var(--c-rack); stroke-width: 10; }
+.c-rack-grid line { stroke: var(--c-rack); stroke-width: 6; }
+.c-rack-bottles circle { fill: var(--c-bottle-end); stroke: #1d2f25; stroke-width: 2; }
+.barrel-end { fill: var(--c-oak); }
+.barrel-face { fill: var(--c-oak-light); }
+.barrel-band { fill: none; stroke: var(--c-hoop); stroke-width: 7; }
+.scene__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 34%, rgba(255, 196, 120, 0.18) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+/* S3 body copy is white for crisp readability over the cellar veil (heading, paragraph,
+   CTA). Scoped to .scene__content--cellar so it hits BOTH the real #scene-cellar and the
+   in-stage .s2-reveal-copy preview, and nothing in S1/S2/catalogue. The "Our craft" eyebrow
+   keeps its warm/gold (.eyebrow--light → --c-amber). */
+.scene__content--cellar .display-title--light { color: #fff; }
+.scene__content--cellar .lede--light { color: rgba(255, 255, 255, 0.92); }
+.scene__content--cellar .btn--ghost-light { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+
+/* =========================================================================
+   FLOATING FOREGROUND ELEMENTS + reusable swipe-in system
+   Each scene is `isolation:isolate`, so a .floating element is trapped in its
+   section's stacking context — always below the fixed header (z-100),
+   scroll-dots (z-90) and journey-fx (z-80). The swipe animates the `translate`
+   property (not `transform`), so a future element could still layer
+   [data-parallax] on top without the two clobbering each other.
+   ========================================================================= */
+.floating {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Reusable left-to-right slide-in — opt-in via the .floating-enter-left class */
+@keyframes floating-enter-left {
+  from { opacity: 0; translate: -32% 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+.floating-enter-left { opacity: 1; translate: 0 0; } /* resting / reduced-motion default */
+@media (prefers-reduced-motion: no-preference) {
+  .floating-enter-left {
+    animation: floating-enter-left 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+/* S1 — large cropped quince branch entering from off-screen top-left.
+   Sized + pushed left so a big visible chunk reads as a strong foreground layer
+   while its right edge stays clear (left) of the centred hero title across desktop
+   widths; z-2 keeps it behind the hero copy (z-3) as a legibility safety net. */
+.floating--quince-s1 {
+  /* px-based clamps → stable size across widths. left crop kept < ~9% of the
+     rendered width so the left quince (starts at image x 11%) is never cut —
+     only leaves/wood crop off-screen; both fruits (img x 11–54%) stay visible. */
+  top: clamp(20px, 3vh, 40px);
+  left: clamp(-44px, -2.8vw, -28px);
+  width: clamp(360px, 30vw, 560px);
+  z-index: 2; /* above the painted scene, below hero content (3) + scroll-arrow (4) */
+}
+.floating--quince-s1 img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* warm/desaturate + deeper shadow so the larger branch reads as a foreground object */
+  filter: saturate(0.85) sepia(0.08) brightness(0.96)
+    drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
+}
+
+/* Reusable right-to-left slide-in — opt-in via the .floating-enter-right class.
+   Mirrors .floating-enter-left so right-anchored foreground elements have the same
+   calm entrance. */
+@keyframes floating-enter-right {
+  from { opacity: 0; translate: 32% 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+.floating-enter-right { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .floating-enter-right {
+    animation: floating-enter-right 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+/* S1 — small cropped vine-leaves accent in the top-right, opposite the quince branch.
+   Sized smaller (≈70% of the quince width) so it reads as a quieter accent. Partially
+   cropped off the top/right edges, slight natural tilt. z:2 keeps it behind the hero
+   copy (z:3) so the title stays clear; hidden on mobile (alongside quince). */
+.floating--vine-s1 {
+  /* Asset is a tall hanging vine (878×1216, portrait). Pushed off the top + right so only
+     a partial slice reads in the corner — feels like a real vine draping in from outside
+     the frame, not a centered sticker. The dense leaf area can pass under the header
+     icons; the header sits at z:100 so the icons always render OVER the z:2 vine and
+     remain readable (pointer-events:none on .floating means no click interception). */
+  top: clamp(-110px, -7vh, -48px);
+  right: clamp(-140px, -8.5vw, -52px);
+  width: clamp(260px, 26vw, 440px);
+  z-index: 2;
+  rotate: -10deg;
+  transform-origin: top right;
+  opacity: 0.88;
+}
+.floating--vine-s1 img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Desaturated + warmer + slightly darker than the quince so it sinks into the painted
+     scene as foliage edge rather than reading like a foreground sticker. */
+  filter: saturate(0.7) sepia(0.14) brightness(0.92) contrast(0.97)
+    drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
+}
+
+/* =========================================================================
+   CATALOGUE PAGE
+   ========================================================================= */
+body[data-page="catalogue"] {
+  background: #efe4ce;
+  min-height: 100vh;
+  /* Faded Moldovan-flag palette + section moods (used as band backgrounds, never as stripes). */
+  --c-shop-blue: #6b8aab;
+  --c-shop-gold: #c8a061;
+  --c-shop-red: #8d3a31;
+  /* Band background colors */
+  --c-band-hero: #c2d2cc;
+  --c-band-reds: #7c3a2f;
+  --c-band-whites: #ead49a;
+  --c-band-rose: #d39593;
+  --c-band-footer: #efe4ce;
+  /* Band ink colors (legible on each band background) */
+  --c-ink-hero: #2a3a36;
+  --c-ink-reds: #f6e8c8;
+  --c-ink-whites: #4a3a1a;
+  --c-ink-rose: #4a1f1f;
+}
+
+/* =========================================================================
+   SHOP (catalogue v3) — full-bleed colored bands, bottles floating directly
+   on the section background (NO product cards), poster headings, wavy
+   separators. Scoped under body[data-page="catalogue"].
+   ========================================================================= */
+
+/* Subtle paper noise reusable on any band — inline SVG turbulence, low opacity. */
+body[data-page="catalogue"] {
+  --shop-paper-noise:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.22  0 0 0 0 0.16  0 0 0 0 0.09  0 0 0 0.16 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.shop { display: block; }
+
+/* ---- HERO ---- */
+.shop-hero {
+  position: relative;
+  background-color: #2c4a66; /* fallback close to the painted image's midtones */
+  background-image: url("assets/shop/shop-hero-bg.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #f5ecd3; /* warm cream, legible over the blue painterly background */
+  padding: calc(var(--header-h) + 6vh) 5vw 12vh;
+  text-align: center;
+  overflow: hidden;
+}
+/* Readability overlays — two pseudo-elements, both at z:2 (above clouds at z:1,
+   below content at z:3).
+   ::before  — vertical gradient: darkens top edge where sky meets the eyebrow.
+   ::after   — radial ellipse: gentle dark centre that fades to nothing at edges,
+               keeps the text legible without muddying the full hero. */
+.shop-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 28, 55, 0.30) 0%, rgba(18, 28, 55, 0.08) 42%, rgba(18, 28, 55, 0) 72%);
+  pointer-events: none;
+  z-index: 2;
+}
+.shop-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 46%, rgba(18, 28, 55, 0.26) 0%, transparent 72%);
+  pointer-events: none;
+  z-index: 2;
+}
+.shop-hero__inner {
+  position: relative;
+  z-index: 3;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.shop-hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 236, 211, 0.82);
+  margin: 0 0 var(--space-4);
+  text-shadow:
+    0 1px 4px rgba(18, 28, 55, 0.80),
+    0 2px 12px rgba(18, 28, 55, 0.50);
+}
+.shop-hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.4rem, 11vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+  color: #f5ecd3;
+  text-shadow:
+    0 2px 5px  rgba(18, 28, 55, 0.88),
+    0 5px 20px rgba(18, 28, 55, 0.55),
+    0 12px 40px rgba(18, 28, 55, 0.30),
+    0 0   52px rgba(240, 215, 140, 0.10);
+}
+.shop-hero__sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  color: rgba(245, 236, 211, 0.88);
+  max-width: 48ch;
+  margin: 0 auto var(--space-6);
+  line-height: 1.55;
+  text-shadow:
+    0 1px 4px  rgba(18, 28, 55, 0.82),
+    0 3px 16px rgba(18, 28, 55, 0.50);
+}
+.shop-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-6);
+}
+.shop-hero__links a {
+  color: rgba(245, 236, 211, 0.92);
+  text-decoration: none;
+  padding: 0.35em 0.2em;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 180ms ease, color 180ms ease;
+  text-shadow:
+    0 1px 4px  rgba(18, 28, 55, 0.80),
+    0 2px 12px rgba(18, 28, 55, 0.48);
+}
+.shop-hero__links a:hover,
+.shop-hero__links a:focus-visible {
+  border-bottom-color: var(--c-shop-gold);
+  color: #fff;
+  outline: none;
+}
+.shop-hero__links span { color: rgba(245, 236, 211, 0.42); }
+.shop-hero__arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245, 236, 211, 0.5);
+  color: rgba(245, 236, 211, 0.95);
+  text-decoration: none;
+  transition: transform 240ms ease, border-color 180ms ease, background 180ms ease, filter 180ms ease;
+  filter: drop-shadow(0 2px 8px rgba(18, 28, 55, 0.55));
+}
+.shop-hero__arrow svg { width: 22px; height: 22px; }
+.shop-hero__arrow:hover {
+  transform: translateY(3px);
+  border-color: var(--c-shop-gold);
+  background: rgba(200, 160, 97, 0.22);
+  color: #fff;
+}
+/* Soft cloud layers — five instances drift slowly left→right across the hero sky,
+   behind the title/links. Three vertical lanes: upper (above title), middle (behind
+   title, opacity ≤ 0.40), lower (link/arrow area). D+E hidden on mobile ≤720px. */
+.shop-hero__cloud {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  left: -40vw; /* base anchor off-screen left; animation translates rightward */
+  filter: blur(1.2px) brightness(1.05);
+  mix-blend-mode: screen;
+  animation: shop-cloud-drift 80s linear infinite;
+  will-change: transform;
+}
+@keyframes shop-cloud-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(180vw, 0, 0); }
+}
+.shop-hero__cloud--a {
+  top: calc(var(--header-h) - 2vh);
+  width: clamp(200px, 26vw, 380px);
+  opacity: 0.55;
+  animation-duration: 75s;
+  animation-delay: -18s;
+}
+.shop-hero__cloud--b {
+  top: calc(var(--header-h) + 26vh);
+  width: clamp(170px, 22vw, 320px);
+  opacity: 0.4; /* lowest — sits in the title's vertical band */
+  animation-duration: 95s;
+  animation-delay: -42s;
+}
+.shop-hero__cloud--c {
+  top: calc(var(--header-h) + 45vh);
+  width: clamp(160px, 20vw, 280px);
+  opacity: 0.5;
+  animation-duration: 55s;
+  animation-delay: -24s;
+}
+.shop-hero__cloud--d {
+  /* upper lane — large, very slow; pairs with A to keep the top sky populated */
+  top: calc(var(--header-h) + 10vh);
+  width: clamp(240px, 32vw, 430px);
+  opacity: 0.34;
+  animation-duration: 110s;
+  animation-delay: -72s;
+}
+.shop-hero__cloud--e {
+  /* lower-middle lane — compact, offset timing so a cloud is almost always visible */
+  top: calc(var(--header-h) + 38vh);
+  width: clamp(145px, 19vw, 260px);
+  opacity: 0.48;
+  animation-duration: 45s;
+  animation-delay: -9s;
+}
+@media (max-width: 720px) {
+  .shop-hero__cloud--a { width: 200px; opacity: 0.5; animation-duration: 70s; }
+  .shop-hero__cloud--b { width: 160px; opacity: 0.36; animation-duration: 90s; }
+  .shop-hero__cloud--c { display: none; }
+  .shop-hero__cloud--d { display: none; }
+  .shop-hero__cloud--e { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Static clouds — no horizontal drift. Anchor each to a sensible position. */
+  .shop-hero__cloud { animation: none; }
+  .shop-hero__cloud--a { left: -6vw; transform: none; }
+  .shop-hero__cloud--b { right: -6vw; left: auto; transform: none; }
+  .shop-hero__cloud--c { left: -2vw; transform: none; }
+  .shop-hero__cloud--d { right: 10vw; left: auto; transform: none; }
+  .shop-hero__cloud--e { left: 25vw; transform: none; }
+}
+
+/* ---- SECTION DIVIDER ORNAMENTS ----
+   Dedicated wrappers placed BETWEEN product bands in the DOM (not inside product content).
+   Zero height → they add no vertical gap and sit exactly on the section boundary (the seam).
+   overflow-x:clip crops the off-viewport-edge portion of the instrument so it can't create a
+   horizontal scrollbar, while overflow-y:visible lets the instrument extend up/down across the
+   seam. z-index sits above both bands' waves (z:3) and content (z:2), below the header (z:100),
+   so the ornament reads as layered ON the divider — never swallowed by the wave. */
+.shop-divider {
+  position: relative;
+  height: 0;
+  z-index: 5;
+  overflow-x: clip;
+  overflow-y: visible;
+  pointer-events: none;
+}
+.shop-divider__instrument {
+  position: absolute;
+  display: block;
+  top: 0; /* the seam: zero-height wrapper sits on the boundary; transforms center the art on it */
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+/* Nai — reds → whites. Right side, mostly visible (~65%), cropped a little on the right,
+   laid across the cream/red seam. Slight desaturate + warm shadow to match the painted style. */
+.shop-divider--nai .shop-divider__instrument {
+  width: clamp(220px, 27vw, 400px);
+  right: 0;
+  transform: translate(38%, -58%) rotate(-4deg); /* ~38% off the right edge → ~64% visible; biased up so it crosses the seam without grazing the next head */
+  filter: saturate(0.84) brightness(0.95) drop-shadow(0 14px 22px rgba(40, 16, 10, 0.40));
+}
+/* Cobza — whites → rose. Left side, smaller than the nai, cropped on the left. The asset is a
+   tall portrait (225×600), so width is kept modest and the art is biased upward (translateY)
+   into the white band's clear lower padding so it never reaches the rose title below. */
+.shop-divider--cobza .shop-divider__instrument {
+  width: clamp(95px, 11vw, 150px);
+  left: 0;
+  transform: translate(-30%, -71%) rotate(6deg); /* ~30% off the left edge → ~70% visible; biased up so its base clears the rose head while still crossing the seam */
+  filter: saturate(0.84) brightness(0.93) drop-shadow(0 14px 20px rgba(40, 24, 8, 0.38));
+}
+@media (max-width: 900px) {
+  .shop-divider { display: none; }
+}
+
+/* ---- BAND BASE ---- */
+.shop-band {
+  position: relative;
+  padding: clamp(70px, 10vh, 130px) 5vw clamp(110px, 14vh, 180px);
+  text-align: center;
+  overflow: hidden;
+  /* Safe area below the fixed header when scrolling to a section anchor — header height
+     plus a comfortable buffer so the title never tucks under the header. */
+  scroll-margin-top: calc(var(--header-h) + 3vh);
+}
+.shop-band__head {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto clamp(40px, 6vh, 80px);
+}
+.shop-band__num {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-4);
+  opacity: 0.75;
+}
+.shop-band__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3rem, 10vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+}
+.shop-band__tag {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  max-width: 52ch;
+  margin: 0 auto;
+  opacity: 0.82;
+  line-height: 1.5;
+}
+/* ---- WAVY SEAM (mask-based, no separate wave element) ----
+   There is no SVG/coloured wave shape anymore. Each band is pulled up by --shop-wave-h and
+   given a wavy TOP edge via a CSS mask, so the "wave" is literally the band's OWN gradient/noise
+   background showing through the mask — no second shape, so no colour mismatch or hairline is
+   possible. The mask's valleys reveal the previous section behind. The negative margin overlaps
+   the previous section by the wave height; the extra top padding keeps content from riding up.
+   z-index:1 keeps the bands below .shop-divider (z:5) so the nai/cobza stay above the seam. */
+.shop-band--reds,
+.shop-band--whites,
+.shop-band--rose {
+  --shop-wave-h: clamp(38px, 5vh, 72px);
+  z-index: 1;
+  margin-top: calc(-1 * var(--shop-wave-h));
+  padding-top: calc(clamp(70px, 10vh, 130px) + var(--shop-wave-h));
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0 60 Q 180 20 360 56 T 720 56 T 1080 56 T 1440 56 L 1440 100 L 0 100 Z'/%3E%3C/svg%3E") top / 100% var(--shop-wave-h) no-repeat,
+    linear-gradient(#000 0 0) bottom / 100% calc(100% - var(--shop-wave-h)) no-repeat;
+  mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0 60 Q 180 20 360 56 T 720 56 T 1080 56 T 1440 56 L 1440 100 L 0 100 Z'/%3E%3C/svg%3E") top / 100% var(--shop-wave-h) no-repeat,
+    linear-gradient(#000 0 0) bottom / 100% calc(100% - var(--shop-wave-h)) no-repeat;
+}
+
+/* Band moods */
+.shop-band--reds {
+  background: var(--c-band-reds);
+  background-image: var(--shop-paper-noise), radial-gradient(80% 60% at 50% 0%, #8e4538 0%, var(--c-band-reds) 70%);
+  color: var(--c-ink-reds);
+}
+.shop-band--reds .shop-band__num { color: rgba(246, 232, 200, 0.72); }
+
+.shop-band--whites {
+  background: var(--c-band-whites);
+  background-image: var(--shop-paper-noise), radial-gradient(80% 60% at 50% 0%, #f0deaa 0%, var(--c-band-whites) 70%);
+  color: var(--c-ink-whites);
+}
+.shop-band--whites .shop-band__num { color: rgba(74, 58, 26, 0.7); }
+
+.shop-band--rose {
+  background: var(--c-band-rose);
+  background-image: var(--shop-paper-noise), radial-gradient(80% 60% at 50% 0%, #dba2a0 0%, var(--c-band-rose) 70%);
+  color: var(--c-ink-rose);
+}
+.shop-band--rose .shop-band__num { color: rgba(74, 31, 31, 0.7); }
+
+/* ---- SHOP ROW (3 bottles floating side-by-side, NO card box) ---- */
+.shop-row {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 80px);
+  max-width: 1240px;
+  margin: 0 auto;
+  align-items: end;
+}
+@media (max-width: 900px) {
+  .shop-row { grid-template-columns: minmax(0, 1fr); gap: clamp(60px, 9vw, 100px); }
+}
+
+/* ---- SHOP FEATURE (single bottle, larger) ---- */
+.shop-feature {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---- SHOP ITEM (no card, no border) ---- */
+.shop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.shop-item__bottle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: clamp(20px, 3vh, 36px);
+}
+.shop-item__bottle .wine-bottle,
+.shop-item__bottle .bottle-fallback {
+  display: block;
+  height: clamp(220px, 30vh, 300px);
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 22px rgba(20, 8, 4, 0.45));
+  transition: transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.shop-item:hover .wine-bottle,
+.shop-item:hover .bottle-fallback {
+  transform: translateY(-6px) rotate(-1.2deg);
+}
+.shop-item__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 320px;
+}
+.shop-item__vintage {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin: 0;
+}
+.shop-item__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.shop-item__type {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.78;
+}
+.shop-item__tasting {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: var(--space-2) 0 0;
+  opacity: 0.84;
+  max-width: 38ch;
+}
+.shop-item__price {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: var(--space-2) 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.shop-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* ---- Feature variant: larger bottle, more breathing room ---- */
+.shop-item--feature .shop-item__bottle .wine-bottle,
+.shop-item--feature .shop-item__bottle .bottle-fallback {
+  height: clamp(280px, 44vh, 440px);
+  max-width: 280px;
+}
+.shop-item--feature .shop-item__name {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+}
+
+/* ---- Badges (playful, slightly rotated pills) ---- */
+.wine-badge {
+  position: absolute;
+  top: 8px;
+  right: -16px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+  transform: rotate(8deg);
+  background: var(--c-shop-gold);
+  color: #2c2018;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.wine-badge--limited { background: #e6c878; color: #2c2018; }
+.wine-badge--sold-out { background: rgba(0, 0, 0, 0.55); color: #fbf4e7; transform: rotate(-6deg); }
+
+/* ---- Pills ---- */
+.pill {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.72em 1.4em;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 120ms ease;
+}
+.pill--ghost {
+  background: transparent;
+  border-color: currentColor;
+  color: inherit;
+  opacity: 0.78;
+}
+.pill--ghost:hover { opacity: 1; background: rgba(255, 255, 255, 0.10); transform: translateY(-1px); }
+.shop-band--whites .pill--ghost:hover { background: rgba(0, 0, 0, 0.06); }
+/* Solid pill: defaults per band so the contrast always works */
+.pill--solid {
+  background: var(--c-shop-gold);
+  border-color: var(--c-shop-gold);
+  color: #2c2018;
+}
+.pill--solid:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.shop-band--reds .pill--solid { background: var(--c-band-whites); border-color: var(--c-band-whites); color: var(--c-band-reds); }
+.shop-band--whites .pill--solid { background: var(--c-band-reds); border-color: var(--c-band-reds); color: var(--c-band-whites); }
+.shop-band--rose .pill--solid { background: var(--c-band-reds); border-color: var(--c-band-reds); color: var(--c-band-whites); }
+.pill--solid.is-added { background: var(--c-shop-gold) !important; color: #2c2018 !important; border-color: var(--c-shop-gold) !important; }
+.pill--solid[disabled] { background: rgba(0, 0, 0, 0.2); color: rgba(255, 255, 255, 0.7); border-color: transparent; cursor: not-allowed; }
+.pill--lg { padding: 0.85em 1.7em; font-size: 0.95rem; }
+
+/* ---- Quick View modal ---- */
+.quick-view {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.quick-view.is-open { opacity: 1; }
+.quick-view[hidden] { display: none; }
+.quick-view__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 14, 8, 0.6);
+  backdrop-filter: blur(2px);
+}
+.quick-view__panel {
+  position: absolute;
+  inset: 4vh 4vw;
+  margin: auto;
+  max-width: 880px;
+  max-height: min(92vh, 720px);
+  background: linear-gradient(180deg, #fbf4e7 0%, #f1e3c4 100%);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  overflow: hidden;
+  transform: translateY(12px);
+  transition: transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  color: var(--c-ink);
+}
+.quick-view.is-open .quick-view__panel { transform: translateY(0); }
+.quick-view__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(44, 32, 24, 0.06);
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+.quick-view__close:hover { background: rgba(44, 32, 24, 0.16); }
+.quick-view__close svg { width: 20px; height: 20px; fill: none; stroke: var(--c-ink); stroke-width: 1.8; stroke-linecap: round; }
+.quick-view__bottle {
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background:
+    radial-gradient(60% 38% at 50% 78%, rgba(196, 161, 96, 0.28) 0%, rgba(196, 161, 96, 0) 70%),
+    linear-gradient(180deg, #fbf4e7 0%, #ecddc1 100%);
+  padding: var(--space-5);
+  overflow: hidden;
+}
+.quick-view__bottle img,
+.quick-view__bottle .bottle-fallback {
+  max-width: 100%;
+  max-height: 60vh;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 22px rgba(40, 24, 8, 0.4));
+}
+.quick-view__body { display: flex; flex-direction: column; gap: var(--space-3); padding-right: var(--space-3); overflow: auto; }
+.quick-view__type {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-shop-blue);
+  margin: 0;
+}
+.quick-view__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 3.6vw, 2.8rem);
+  margin: 0;
+  color: var(--c-ink);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.quick-view__meta {
+  font-family: var(--font-body);
+  color: rgba(44, 32, 24, 0.78);
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+.quick-view__notes {
+  font-family: var(--font-body);
+  color: rgba(44, 32, 24, 0.82);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.quick-view__foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(196, 161, 96, 0.3);
+}
+.quick-view__price {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--c-ink);
+  font-variant-numeric: tabular-nums;
+}
+/* QV solid pill: always cream-on-ink, never inherits band overrides */
+.quick-view .pill--solid { background: var(--c-ink) !important; border-color: var(--c-ink) !important; color: #fbf4e7 !important; font-size: 0.95rem; }
+@media (max-width: 720px) {
+  .quick-view__panel {
+    grid-template-columns: 1fr;
+    inset: 2vh 4vw;
+    padding: var(--space-5);
+    gap: var(--space-4);
+    overflow-y: auto;
+  }
+  .quick-view__bottle { padding: var(--space-4); }
+  .quick-view__bottle img,
+  .quick-view__bottle .bottle-fallback { max-height: 38vh; }
+}
+
+/* ---- Slim placeholder footer ---- */
+.site-footer {
+  background: var(--c-band-footer);
+  padding: var(--space-7) 5vw var(--space-5);
+  color: rgba(44, 32, 24, 0.78);
+  font-family: var(--font-body);
+}
+.site-footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+.site-footer__brand { display: flex; flex-direction: column; gap: var(--space-2); }
+.site-footer__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal; /* match the header .brand__mark (non-italic) now that brand is CĂTUN */
+  font-size: 1.4rem;
+  color: var(--c-ink);
+  margin: 0;
+}
+.site-footer__placeholder { margin: 0; font-size: 0.86rem; opacity: 0.7; }
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+.site-footer__col p { margin: 0 0 0.35em; font-size: 0.92rem; }
+.site-footer__head {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-shop-gold);
+  margin: 0 0 var(--space-3) !important;
+}
+.site-footer__legal {
+  max-width: 1200px;
+  margin: var(--space-6) auto 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(196, 161, 96, 0.3);
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .site-footer__inner { grid-template-columns: 1fr; gap: var(--space-5); }
+  .site-footer__cols { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+
+/* =========================================================================
+   (legacy catalogue v1 rules below remain but match nothing on the new page)
+   ========================================================================= */
+.cat-main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: calc(var(--header-h) + var(--space-7)) clamp(1rem, 4vw, 2.5rem) var(--space-8);
+}
+.cat-hero {
+  max-width: 60ch;
+  margin-bottom: var(--space-6);
+}
+.cat-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  letter-spacing: -0.01em;
+}
+.cat-sub {
+  margin-top: var(--space-3);
+  color: var(--c-muted);
+}
+
+/* Toolbar */
+.cat-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 0 0 auto;
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  color: var(--c-ink);
+  border-radius: var(--radius-pill);
+  padding: 0.5em 1.1em;
+  font-size: 0.9rem;
+  transition: background-color var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease),
+    color var(--dur-base) var(--ease);
+}
+.tab:hover { border-color: var(--c-accent); }
+.tab.is-active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-white);
+}
+.tab__count {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  margin-left: 0.4em;
+}
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: space-between;
+}
+.search {
+  position: relative;
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+.search svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--c-muted);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.search input {
+  width: 100%;
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  border-radius: var(--radius-pill);
+  padding: 0.7em 2.4em;
+  font-size: 0.95rem;
+  color: var(--c-ink);
+}
+.search input::placeholder { color: var(--c-muted); }
+.search input:focus-visible { border-color: var(--c-accent); outline: none; }
+.search__clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  display: none;
+  place-items: center;
+  color: var(--c-muted);
+}
+.search__clear svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.search.has-value .search__clear { display: grid; }
+.toolbar-actions { display: flex; align-items: center; gap: var(--space-3); }
+.sort-select {
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  border-radius: var(--radius-pill);
+  padding: 0.6em 2.2em 0.6em 1em;
+  font-size: 0.92rem;
+  color: var(--c-ink);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f6052' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7em center;
+  background-size: 16px;
+}
+.filters-btn {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  border-radius: var(--radius-pill);
+  padding: 0.6em 1.1em;
+  font-size: 0.92rem;
+}
+.filters-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+
+/* Body layout */
+.cat-body {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: clamp(var(--space-5), 3vw, var(--space-7));
+  align-items: start;
+}
+.filters {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-4));
+}
+.filter-group { margin-bottom: var(--space-6); }
+.filter-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  margin-bottom: var(--space-3);
+}
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.check-row input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--c-accent);
+}
+.price-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--c-accent);
+}
+.price-value {
+  margin-top: var(--space-2);
+  font-size: 0.88rem;
+  color: var(--c-muted);
+}
+.clear-filters {
+  color: var(--c-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.clear-filters[disabled] { color: var(--c-muted); text-decoration: none; cursor: default; }
+
+/* Product grid + cards */
+.result-count {
+  margin-bottom: var(--space-4);
+  color: var(--c-muted);
+  font-size: 0.9rem;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.card-media {
+  position: relative;
+  height: 230px;
+  border-radius: var(--radius-md);
+  background: radial-gradient(120% 80% at 50% 10%, #fff8ec 0%, #efe2cb 100%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.card-media svg { height: 86%; width: auto; }
+.card-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  background: var(--c-accent);
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-pill);
+}
+.card-badge--sold { background: rgba(44, 32, 24, 0.78); }
+.card-type {
+  margin-top: var(--space-4);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.card-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.18rem;
+  margin-top: var(--space-1);
+}
+.card-meta { font-size: 0.86rem; color: var(--c-muted); margin-top: var(--space-1); }
+.card-foot {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.card-price { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
+.add-btn {
+  border: none;
+  background: var(--c-accent);
+  color: var(--c-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.6em 1em;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--dur-base) var(--ease);
+}
+.add-btn:hover { background: var(--c-accent-soft); }
+.add-btn.is-added { background: var(--c-quince); }
+.add-btn[disabled] { background: transparent; color: var(--c-muted); border: 1px solid var(--c-line); cursor: default; }
+
+/* Empty state */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+  border: 1px dashed var(--c-line);
+  border-radius: var(--radius-lg);
+  background: rgba(251, 244, 231, 0.5);
+}
+.empty-state svg { width: 44px; height: 44px; margin: 0 auto var(--space-4); fill: none; stroke: var(--c-muted); stroke-width: 1.4; stroke-linecap: round; }
+.empty-state h3 { font-family: var(--font-display); font-size: 1.4rem; }
+.empty-state p { color: var(--c-muted); margin-top: var(--space-2); }
+.empty-state .btn { margin-top: var(--space-5); }
+
+/* Filter drawer (mobile) */
+.filter-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: none;
+}
+.filter-drawer.is-open { display: block; }
+.filter-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 26, 18, 0.45);
+}
+.filter-drawer__panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(86%, 360px);
+  background: var(--c-paper);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform var(--dur-base) var(--ease);
+}
+.filter-drawer.is-open .filter-drawer__panel { transform: translateX(0); }
+.filter-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--c-line);
+}
+.filter-drawer__head h2 { font-family: var(--font-display); font-size: 1.25rem; }
+.filter-drawer__close { width: 40px; height: 40px; border-radius: var(--radius-pill); display: grid; place-items: center; }
+.filter-drawer__close svg { width: 22px; height: 22px; fill: none; stroke: var(--c-ink); stroke-width: 1.7; stroke-linecap: round; }
+.filter-drawer__body { padding: var(--space-5); overflow-y: auto; }
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .cat-body { grid-template-columns: 1fr; }
+  .filters { display: none; }
+  .filters-btn { display: inline-flex; }
+}
+@media (max-width: 760px) {
+  :root { --header-h: 64px; }
+  .scroll-dots { display: none; }
+  .header-icons .icon-btn:not(.icon-btn--cart) { display: none; }
+  .brand__tag { display: none; }
+  /* fence: shorter band on phones so the full folk gate reads without crowding the house */
+  .scene__fence { height: clamp(260px, 42vh, 460px); }
+  .scene__content--cellar { text-align: center; align-items: center; margin: 0 auto; }
+  .scene__content--cellar .display-title span { white-space: normal; } /* let the title wrap on phones */
+  /* cellar text re-centres on mobile → swap the left veil for a centred scrim */
+  .scene__veil--cellar {
+    background: radial-gradient(130% 90% at 50% 48%, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+  /* Floating quince + vine hidden on phones (top corners collide with hamburger/cart + high title) */
+  .floating--quince-s1,
+  .floating--vine-s1 { display: none; }
+}
+
+/* =========================================================================
+   CINEMATIC SCROLL JOURNEY — transitions between the three sections.
+   script.js sets, on :root, --village-to-house & --house-to-cellar (linear
+   0..1 as each next section scrolls in) and --haze & --doorway (0 at the
+   ends, 1 mid-transition) so the seams blend instead of hard-cutting.
+   ========================================================================= */
+:root {
+  --village-to-house: 0;
+  --house-to-cellar: 0;
+  --haze: 0;
+  --doorway: 0;
+  --s2s3: 0; /* S2→S3 fence-pull pin progress (0..1), set by initFencePull on desktop */
+  --s2s3e: 0; /* eased pin progress (smoothstep of --s2s3); drives the cellar reveal mask in lockstep with the fence lift */
+}
+
+/* Fixed overlay painting the FX across the seam — above scenes, below dots/header */
+.journey-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+.journey-fx > * {
+  position: absolute;
+  inset: 0;
+}
+/* Vineyard → house: warm dust / low-sun haze blooming at the seam as it crosses centre */
+.transition-haze {
+  opacity: calc(max(var(--haze) - 0.22, 0) * 1.05); /* gated: stays 0 on the still hero, blooms only after scrolling */
+  background:
+    radial-gradient(120% 55% at 50% 60%, rgba(255, 214, 150, 0.55) 0%, rgba(255, 214, 150, 0) 60%),
+    radial-gradient(70% 38% at 50% 57%, rgba(255, 238, 196, 0.5) 0%, rgba(255, 238, 196, 0) 55%),
+    linear-gradient(0deg, rgba(247, 232, 205, 0.32) 0%, rgba(247, 232, 205, 0) 36%);
+}
+/* House → cellar: underground shadow falling from above as the earth opens to the beci below */
+.transition-doorway {
+  /* Phase C: also bloom during the pinned hold. The bell min(2t,2-2t) ≡ 1-|2t-1|
+     peaks at t=0.5 and returns to 0 by t=1, so the shadow is gone at the handoff
+     (no pop vs the real cellar, where --doorway≈0). max() keeps the existing
+     post-pin behavior; on mobile/reduced-motion --s2s3:0 → collapses to --doorway. */
+  opacity: max(var(--doorway), calc(0.70 * min(var(--s2s3) * 2, 2 - var(--s2s3) * 2)));
+  /* shadow band from the top of the viewport (the ground overhead) — depth, not a door shape */
+  background:
+    linear-gradient(to bottom, rgba(6, 4, 2, 0.58) 0%, rgba(6, 4, 2, 0) 26%),
+    radial-gradient(110% 55% at 50% 0%, rgba(4, 2, 0, 0.45) 0%, rgba(4, 2, 0, 0) 70%);
+}
+/* Warm light spilling from inside the beci as you pass through the doorway */
+.transition-lightspill {
+  /* Phase C: warm spill blooms with the same pin bell as the doorway, kept at half
+     strength. Returns to 0 by t=1 → clean handoff. Mobile/reduced-motion: --s2s3:0. */
+  opacity: calc(max(var(--doorway), calc(0.70 * min(var(--s2s3) * 2, 2 - var(--s2s3) * 2))) * 0.50);
+  /* warm honey glow rising from the cellar below the seam (not a centred portal spotlight) */
+  background: radial-gradient(48% 40% at 50% 68%, rgba(255, 172, 86, 0.55) 0%, rgba(255, 146, 64, 0.12) 50%, rgba(255, 146, 64, 0) 72%);
+  mix-blend-mode: screen;
+}
+
+/* =========================================================================
+   ORGANIC SECTION SEAMS — overlap the scenes and tear/arch their top edges
+   so the photos meet on handmade contours, not straight rectangular cuts.
+   Masks apply ONLY to each scene's background layers (sky/photo/veil), never
+   its .scene__content, so headings stay crisp. Overlap >= mask depth so the
+   torn zone always reveals the previous scene (never the page background).
+   ========================================================================= */
+.scene--house { margin-top: -6vh; }  /* small overlap: the wave sits low, only intruding as you scroll */
+.scene--cellar { margin-top: -7vh; }  /* small overlap: cellar enters low + late, framed as a doorway, not a sliced strip */
+/* even gentler cellar overlap on phones — placed AFTER the base rule so it wins the cascade (same specificity) */
+@media (max-width: 760px) { .scene--cellar { margin-top: -5vh; } }
+
+/* S1->S2: gentle torn earth/ridge edge — kept shallow (~5%) so the small -6vh overlap reveals it only as you scroll, never on the still hero */
+.scene--house .scene__sky,
+.scene--house .scene__photo,
+.scene--house .scene__veil {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0,36 C160,23 300,44 460,33 C620,22 760,44 920,35 C1080,23 1230,43 1380,32 C1410,29 1430,37 1440,34 L1440,900 L0,900 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0,36 C160,23 300,44 460,33 C620,22 760,44 920,35 C1080,23 1230,43 1380,32 C1410,29 1430,37 1440,34 L1440,900 L0,900 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* S2->S3: irregular wavy/torn earth line — same visual language as S1->S2 (kept shallow ~3% so the -7vh overlap reveals it only at the seam, and it doesn't fight the parallax fence planted in the ground above) */
+.scene--cellar .scene__cellar-bg,
+.scene--cellar .scene__photo,
+.scene--cellar .scene__veil {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0,36 C200,20 400,42 600,28 C800,14 960,40 1100,26 C1240,12 1380,36 1440,30 L1440,900 L0,900 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0,36 C200,20 400,42 600,28 C800,14 960,40 1100,26 C1240,12 1380,36 1440,30 L1440,900 L0,900 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* =========================================================================
+   DESKTOP PINNED HANDOFF (Phase C fix) — superimpose the real #scene-cellar
+   under the released stage and swap to it invisibly, so there is never a second
+   cellar on screen. Desktop + motion ONLY; placed after the seam/transition rules
+   so it overrides the base -7vh overlap, the --house-to-cellar atmosphere, and the
+   cellar seam mask. Mobile (≤760px) and reduced-motion keep everything as-is.
+   ========================================================================= */
+@media (min-width: 761px) and (prefers-reduced-motion: no-preference) {
+  /* Pull the real cellar up so its top coincides EXACTLY with the released sticky
+     stage top (independent of --pin-extra), and paint the opaque house/stage OVER it
+     so it stays hidden behind the reveal until the swap — no peek, no duplicate. */
+  .scene--cellar { margin-top: -100vh; }
+  .scene--house { z-index: 1; }
+
+  /* Handoff swap: when the real cellar has risen to the viewport top (JS adds
+     .is-released), hide the now-redundant stage. Same image + same box at that
+     instant → invisible swap; visibility keeps layout so there is no jump. */
+  .s2-pin.is-released .s2-stage { visibility: hidden; }
+  /* .scene--house (z-index:1) lifts all of Section 2 ABOVE the -100vh-superimposed real
+     cellar, so at rest it would swallow clicks on the real #scene-cellar CTA. Once
+     released the stage is visibility:hidden and Section 2's own interactive content has
+     scrolled above the viewport, so let clicks fall through the whole section to the real
+     cellar CTA underneath. Scoped via :has() since .is-released lives on the child pin. */
+  .scene--house:has(.s2-pin.is-released) { pointer-events: none; }
+
+  /* The -100vh overlap makes --house-to-cellar read high during the pin, which would
+     otherwise throw the underground shadow + fence tint over the HOUSE at rest. Drive
+     the atmosphere from --s2s3 only, and drop the now-mistimed tint. RAMP-AND-HOLD
+     (min(2t,1)): rises 0→peak over --s2s3 0..0.5, then HOLDS through release and into
+     the final cellar — so the glowing S3 reveal look IS the final settled S3 look
+     (no late-pin fade-out, no jump between "preview at swap" and "real cellar"). */
+  .transition-doorway { opacity: calc(0.70 * min(var(--s2s3) * 2, 1)); }
+  /* Warm "glow/mist": same ramp-and-hold curve. Peaks at --s2s3=0.5 (0.20) and stays
+     there through release. Post-pin --s2s3 is clamped at 1, so the real cellar keeps
+     the same glow → frame-before-release and frame-after-release are identical. */
+  .transition-lightspill { opacity: calc(0.20 * min(var(--s2s3) * 2, 1)); }
+  .scene__fence::after { opacity: 0; }
+  /* Match the real cellar's overlays 1:1 to the preview's SOFTENED .s2-reveal::after above
+     (desktop+motion ONLY, so mobile/reduced-motion keep the original heavier values) — so
+     the final settled cellar reads as the same warm/glowing state as the reveal, with no
+     dark "no-glow" phase at the swap. Warm bloom + vignette in .scene__glow; reduced left
+     scrim in .scene__veil--cellar; the title's text-shadow keeps readability. */
+  #scene-cellar .scene__glow {
+    background:
+      radial-gradient(60% 50% at 50% 34%, rgba(255, 196, 120, 0.14) 0%, rgba(0, 0, 0, 0) 60%),
+      /* baked-in warm honey bloom centered lower-middle (same anchor as .transition-lightspill
+         radial) so the final cellar permanently glows — independent of the lightspill ramp. */
+      radial-gradient(56% 46% at 50% 68%, rgba(255, 172, 86, 0.26) 0%, rgba(255, 146, 64, 0.08) 50%, rgba(255, 146, 64, 0) 75%),
+      /* bottom-left depth shadow — subtle corner anchor; fades quickly so it doesn't darken
+         the whole cellar or kill the warm bloom. Mirrored in .s2-reveal::after for clean swap. */
+      radial-gradient(55% 65% at 0% 100%, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0.12) 40%, rgba(0, 0, 0, 0) 72%),
+      radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0) 60%);
+  }
+  #scene-cellar .scene__veil--cellar {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.10) 46%, rgba(0, 0, 0, 0) 72%);
+  }
+
+  /* Permanent warm glow ON the S3 text/content itself — no room-wide pseudo-element. Each
+     element carries its own text-shadow/box-shadow stack so the glow follows the type and
+     stays visible through the reveal AND in the final settled cellar without touching the
+     room brightness. Applies to BOTH the real #scene-cellar copy and the in-stage preview
+     (.s2-reveal-copy) so the swap is continuous. */
+  #scene-cellar .scene__content--cellar .display-title--light,
+  .s2-reveal-copy .scene__content--cellar .display-title--light {
+    color: #fff;
+    text-shadow:
+      0 3px 12px rgba(0, 0, 0, 0.58),
+      0 0 16px rgba(255, 255, 255, 0.22),
+      0 0 38px rgba(255, 178, 92, 0.28);
+  }
+
+  #scene-cellar .scene__content--cellar .lede--light,
+  .s2-reveal-copy .scene__content--cellar .lede--light {
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.65),
+      0 0 18px rgba(255, 178, 92, 0.16);
+  }
+
+  #scene-cellar .scene__content--cellar .eyebrow--light,
+  .s2-reveal-copy .scene__content--cellar .eyebrow--light {
+    color: var(--c-amber);
+    text-shadow: 0 0 16px rgba(224, 181, 116, 0.35);
+  }
+
+  #scene-cellar .scene__content--cellar .btn--ghost-light,
+  .s2-reveal-copy .scene__content--cellar .btn--ghost-light {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.62);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 0 22px rgba(255, 178, 92, 0.14);
+  }
+
+  /* Drop the wavy top seam on the cellar so the coincident handoff has no torn edge. */
+  .scene--cellar .scene__cellar-bg,
+  .scene--cellar .scene__photo,
+  .scene--cellar .scene__veil { -webkit-mask: none; mask: none; }
+}
+
+/* Depth: the vineyard background drifts/zooms gently as you leave it behind */
+.scene--village .scene__photo {
+  transform: scale(calc(1 + var(--village-to-house) * 0.08))
+    translateY(calc(var(--village-to-house) * -2.2%));
+  transform-origin: 50% 72%;
+  will-change: transform;
+}
+/* Graceful arrivals: each section's copy eases in as its transition completes */
+.scene--house .scene__content {
+  /* Phase C (final): NO --s2s3 opacity fade. The S2 copy is physically COVERED by the
+     rising ground/cellar (it sits below .s2-reveal via z-index, desktop+motion) instead
+     of fading. This is the original S1→S2 entrance opacity, unchanged on every viewport. */
+  opacity: calc(0.35 + var(--village-to-house) * 0.65);
+  transform: translateY(calc((1 - var(--village-to-house)) * 26px));
+}
+.scene--cellar .scene__content {
+  opacity: calc(0.35 + var(--house-to-cellar) * 0.65);
+  transform: translateY(calc((1 - var(--house-to-cellar)) * 26px));
+}
+
+/* =========================================================================
+   REDUCED MOTION
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .scene__fence { transform: none !important; }
+  /* drop the depth zoom + slide-in; keep copy fully visible and static */
+  .scene--village .scene__photo { transform: none !important; }
+  .scene--house .scene__content,
+  .scene--cellar .scene__content { opacity: 1 !important; transform: none !important; }
+  /* organic edge masks stay (static, not motion); only soften the scroll-driven washes */
+  .transition-haze { opacity: calc(max(var(--haze) - 0.22, 0) * 0.6) !important; }
+  .transition-doorway { opacity: calc(var(--doorway) * 0.5) !important; }
+  .transition-lightspill { opacity: calc(var(--doorway) * 0.3) !important; }
+  /* keep the cellar tint as a gentle static cue, at reduced strength */
+  .scene__fence::after { opacity: calc(min(var(--house-to-cellar) * 2.2, 1) * 0.45) !important; }
+}

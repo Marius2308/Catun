@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Wine catalogue placeholder — Via Bunicului. Vinuri Rosii, Vinuri Albe, Vinuri Rose." />
+    <title>Wine Catalogue — CĂTUN (Placeholder)</title>
+    <link rel="stylesheet" href="styles.css?v=c" />
+  </head>
+  <body data-page="catalogue">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ============ HEADER (mirrors index.html) ============ -->
+    <header class="site-header is-scrolled" id="siteHeader">
+      <div class="header-inner">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="menuOverlay">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+        <a class="brand" href="index.html" aria-label="CĂTUN — home">
+          <span class="brand__mark">CĂTUN</span>
+        </a>
+        <div class="header-icons">
+          <button class="icon-btn" aria-label="Region">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" />
+            </svg>
+          </button>
+          <button class="icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M5 20c1.5-4 12.5-4 14 0" />
+            </svg>
+          </button>
+          <button class="icon-btn icon-btn--cart" aria-label="Cart">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 7h13l-1.3 9.5a2 2 0 0 1-2 1.7H9.3a2 2 0 0 1-2-1.7L6 7z" />
+              <path d="M9 7a3 3 0 0 1 6 0" />
+            </svg>
+            <span class="cart-count" id="cartCount" aria-hidden="true">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ FULLSCREEN MENU OVERLAY (matches index.html) ============ -->
+    <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+      <nav class="menu-overlay__nav" aria-label="Primary">
+        <a href="index.html"><span class="menu-num">01</span> Home</a>
+        <a href="catalogue.html" aria-current="page"><span class="menu-num">02</span> Wines</a>
+        <a href="index.html#scene-cellar"><span class="menu-num">03</span> Our Cellar</a>
+        <a href="index.html#scene-house"><span class="menu-num">04</span> The Estate</a>
+        <a href="catalogue.html"><span class="menu-num">05</span> Shop</a>
+      </nav>
+      <p class="menu-overlay__note">Placeholder navigation — replace links at branding.</p>
+    </div>
+
+    <!-- ============ SHOP MAIN ============ -->
+    <main class="shop" id="main">
+      <!-- HERO -->
+      <section class="shop-hero" aria-label="Wine catalogue intro">
+        <!-- Soft cloud layers — drift slowly left→right across the sky behind the hero content. -->
+        <img class="shop-hero__cloud shop-hero__cloud--a" src="assets/shop/cloud-soft.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+        <img class="shop-hero__cloud shop-hero__cloud--b" src="assets/shop/cloud-soft.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+        <img class="shop-hero__cloud shop-hero__cloud--c" src="assets/shop/cloud-soft.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+        <img class="shop-hero__cloud shop-hero__cloud--d" src="assets/shop/cloud-soft.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+        <img class="shop-hero__cloud shop-hero__cloud--e" src="assets/shop/cloud-soft.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+
+        <div class="shop-hero__inner">
+          <p class="shop-hero__eyebrow">The Cellar Range</p>
+          <h1 class="shop-hero__title">Vinuri de Acasă</h1>
+          <p class="shop-hero__sub">From the hillside cellar — three families, picked by hand, kept in stone.</p>
+
+          <nav class="shop-hero__links" aria-label="Wine collections">
+            <a href="#vinuri-rosii">Vinuri Roșii</a>
+            <span aria-hidden="true">·</span>
+            <a href="#vinuri-albe">Vinuri Albe</a>
+            <span aria-hidden="true">·</span>
+            <a href="#vinuri-rose">Vinuri Roze</a>
+          </nav>
+
+          <a class="shop-hero__arrow" href="#vinuri-rosii" aria-label="Scroll to wines">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- BAND 1 — VINURI ROSII -->
+      <section class="shop-band shop-band--reds" id="vinuri-rosii" aria-labelledby="title-rosii">
+        <div class="shop-band__head">
+          <p class="shop-band__num">01 · Casă de Vin</p>
+          <h2 class="shop-band__title" id="title-rosii">Vinuri Roșii</h2>
+          <p class="shop-band__tag">Dealuri, lemn vechi, răbdare — three reds from the hillside rows.</p>
+        </div>
+        <div class="shop-row" id="grid-vinuri-rosii"></div>
+      </section>
+
+      <!-- DIVIDER — reds → whites: nai laid across the seam (dedicated transition ornament). -->
+      <div class="shop-divider shop-divider--nai" aria-hidden="true">
+        <img class="shop-divider__instrument" src="assets/floating/floating-nai.png" alt="" decoding="async" loading="lazy" />
+      </div>
+
+      <!-- BAND 2 — VINURI ALBE -->
+      <section class="shop-band shop-band--whites" id="vinuri-albe" aria-labelledby="title-albe">
+        <div class="shop-band__head">
+          <p class="shop-band__num">02 · Pivnița Albă</p>
+          <h2 class="shop-band__title" id="title-albe">Vinuri Albe</h2>
+          <p class="shop-band__tag">Cool-fermented, barrel-rested — the cellar's crown white.</p>
+        </div>
+        <div class="shop-feature" id="grid-vinuri-albe"></div>
+      </section>
+
+      <!-- DIVIDER — whites → rose: cobza laid across the seam (dedicated transition ornament). -->
+      <div class="shop-divider shop-divider--cobza" aria-hidden="true">
+        <img class="shop-divider__instrument" src="assets/floating/floating-cobza.png" alt="" decoding="async" loading="lazy" />
+      </div>
+
+      <!-- BAND 3 — VINURI ROSE -->
+      <section class="shop-band shop-band--rose" id="vinuri-rose" aria-labelledby="title-rose">
+        <div class="shop-band__head">
+          <p class="shop-band__num">03 · Amintiri de Vară</p>
+          <h2 class="shop-band__title" id="title-rose">Vinuri Roze</h2>
+          <p class="shop-band__tag">Picked early, pressed light — a porch wine with a long memory.</p>
+        </div>
+        <div class="shop-feature" id="grid-vinuri-rose"></div>
+      </section>
+    </main>
+
+    <!-- ============ QUICK VIEW MODAL ============ -->
+    <div class="quick-view" id="quickView" hidden aria-hidden="true">
+      <div class="quick-view__backdrop" data-quick-close></div>
+      <div class="quick-view__panel" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
+        <button class="quick-view__close" id="quickViewClose" aria-label="Close quick view" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <div class="quick-view__bottle">
+          <img id="quickViewImg" src="" alt="" />
+        </div>
+        <div class="quick-view__body">
+          <p class="quick-view__type" id="quickViewType"></p>
+          <h3 class="quick-view__title" id="quickViewTitle"></h3>
+          <p class="quick-view__meta" id="quickViewMeta"></p>
+          <p class="quick-view__notes" id="quickViewNotes"></p>
+          <div class="quick-view__foot">
+            <span class="quick-view__price" id="quickViewPrice"></span>
+            <button class="pill pill--solid pill--lg" type="button" data-quick-add>Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SLIM FOOTER ============ -->
+    <footer class="site-footer" aria-label="Site footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <p class="site-footer__mark">CĂTUN</p>
+          <p class="site-footer__placeholder">Placeholder copy — replace at branding.</p>
+        </div>
+        <div class="site-footer__cols">
+          <div class="site-footer__col">
+            <p class="site-footer__head">Visit</p>
+            <p>Cellar &amp; tasting room</p>
+            <p>Open by appointment</p>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__head">Trade</p>
+            <p>Distribution enquiries</p>
+            <p>Restaurant program</p>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__head">Contact</p>
+            <p>hello@example.ro</p>
+            <p>@catun</p>
+          </div>
+        </div>
+      </div>
+      <p class="site-footer__legal">© <span id="footerYear">2026</span> CĂTUN · Placeholder build</p>
+    </footer>
+
+    <script src="script.js?v=c" defer></script>
+  </body>
+</html>

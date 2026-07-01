@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Via Bunicului — an immersive countryside wine scroll journey. Placeholder content."
+    />
+    <title>CĂTUN — Countryside Wine (Placeholder)</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Hero background is the LCP image — fetch it early -->
+    <link rel="preload" as="image" href="assets/s1-bg.webp" fetchpriority="high" />
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ============ HEADER (fixed transparent overlay) ============ -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="menuOverlay"
+        >
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+
+        <a class="brand" href="index.html" aria-label="CĂTUN — home">
+          <span class="brand__mark">CĂTUN</span>
+        </a>
+
+        <div class="header-icons">
+          <button class="icon-btn" aria-label="Region">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" />
+            </svg>
+          </button>
+          <button class="icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M5 20c1.5-4 12.5-4 14 0" />
+            </svg>
+          </button>
+          <button class="icon-btn icon-btn--cart" aria-label="Cart">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 7h13l-1.3 9.5a2 2 0 0 1-2 1.7H9.3a2 2 0 0 1-2-1.7L6 7z" />
+              <path d="M9 7a3 3 0 0 1 6 0" />
+            </svg>
+            <span class="cart-count" aria-hidden="true">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ FULLSCREEN MENU OVERLAY ============ -->
+    <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+      <nav class="menu-overlay__nav" aria-label="Primary">
+        <a href="index.html"><span class="menu-num">01</span> Home</a>
+        <a href="catalogue.html"><span class="menu-num">02</span> Wines</a>
+        <a href="#scene-cellar"><span class="menu-num">03</span> Our Cellar</a>
+        <a href="#scene-house"><span class="menu-num">04</span> The Estate</a>
+        <a href="catalogue.html"><span class="menu-num">05</span> Shop</a>
+      </nav>
+      <p class="menu-overlay__note">Placeholder navigation — replace links at branding.</p>
+    </div>
+
+    <!-- ============ SECTION SCROLL DOTS ============ -->
+    <nav class="scroll-dots" id="scrollDots" aria-label="Scroll sections">
+      <a href="#scene-village" class="dot is-active" data-dot="1"><span class="dot__label">Vineyard</span></a>
+      <a href="#scene-house" class="dot" data-dot="2"><span class="dot__label">Cellar door</span></a>
+      <a href="#scene-cellar" class="dot" data-dot="3"><span class="dot__label">The cellar</span></a>
+    </nav>
+
+    <main id="main">
+      <!-- ==================================================== -->
+      <!-- SECTION 1 — VILLAGE / VINEYARD ENTRANCE HERO         -->
+      <!-- ==================================================== -->
+      <section class="scene scene--village" id="scene-village" data-scene="1" aria-label="Vineyard entrance">
+        <div class="scene__sky" aria-hidden="true"></div>
+        <!-- Real client background (replaces the old CSS/SVG scene art) -->
+        <img class="scene__photo" src="assets/s1-bg.webp" alt="" fetchpriority="high" decoding="async" />
+        <div class="scene__veil scene__veil--village" aria-hidden="true"></div>
+        <div class="scene__grain" aria-hidden="true"></div>
+
+        <!-- Foreground quince branch sliding in from the top-left (reusable .floating-enter-left) -->
+        <div class="floating floating--quince-s1 floating-enter-left" aria-hidden="true">
+          <img src="assets/floating/floating-quince-branch.png" alt="" loading="lazy" decoding="async" />
+        </div>
+
+        <!-- Foreground vine-leaves accent (top-right, opposite the quince). Smaller/subtler;
+             cropped off the top/right edge with a slight natural tilt. -->
+        <div class="floating floating--vine-s1 floating-enter-right" aria-hidden="true">
+          <img src="assets/floating/floating-vine-leaves.png" alt="" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="scene__content scene__content--center">
+          <p class="eyebrow">A HAMLET · A HILLSIDE · A CELLAR</p>
+          <h1 class="display-title">
+            CĂTUN
+          </h1>
+          <p class="lede">
+            Wine from a small place, made slowly.
+          </p>
+          <p class="hero-meta">VINTAGE&nbsp;2025 · 8,000&nbsp;BOTTLES · ONE&nbsp;CELLAR&nbsp;BOOK</p>
+          <a class="btn btn--primary btn--lg" href="catalogue.html" data-scroll>
+            SEE THE WINES
+            <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+
+        <button class="scroll-arrow" data-scroll-target="#scene-house" aria-label="Scroll to next section">
+          <span class="scroll-arrow__word">Scroll</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+        </button>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SECTION 2 — COUNTRYSIDE HOUSE / CELLAR ENTRANCE      -->
+      <!-- ==================================================== -->
+      <section class="scene scene--house" id="scene-house" data-scene="2" aria-label="Countryside house and cellar entrance">
+        <!-- Phase A scaffold: pin + stage wrappers are display:contents (no-op at rest); activated in later phases -->
+        <div class="s2-pin"><div class="s2-stage">
+        <div class="s2-reveal" aria-hidden="true"></div>
+        <!-- Decorative preview of the Section 3 copy, fades/slides in during the pinned lift
+             (desktop+motion only). The real #scene-cellar copy below stays the accessible one. -->
+        <div class="s2-reveal-copy" aria-hidden="true">
+          <div class="scene__content scene__content--cellar">
+            <p class="eyebrow eyebrow--light">LIKE NO OTHERS</p>
+            <h2 class="display-title display-title--light"><span>Nothing added.</span><span>Nothing hurried.</span></h2>
+            <p class="lede lede--light">
+              Wild yeast. Whole grapes. Old vines. Patience. We do not correct what the year
+              gives — we let the cellar hold it.
+            </p>
+            <p class="lede lede--light">
+              Eight thousand bottles a year. Each one numbered before it leaves the stone.
+            </p>
+            <a class="btn btn--ghost-light btn--lg" href="catalogue.html">
+              SEE THE WINES
+              <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+        </div>
+        <div class="scene__sky scene__sky--day" aria-hidden="true"></div>
+        <!-- Real client background (house + beci built in) -->
+        <img class="scene__photo" src="assets/s2-bg.webp" alt="" loading="lazy" decoding="async" />
+        <div class="scene__veil scene__veil--house" aria-hidden="true"></div>
+        <div class="scene__grain" aria-hidden="true"></div>
+
+        <!-- Decorative swallows — Section 2 only. Same asset twice, second one mirrored.
+             Inside .s2-stage so they hide with the stage at the S2→S3 release (no birds in the
+             cellar). CSS drives opacity + swoop translate from --village-to-house so they fade
+             and slide into position as Section 2 enters. -->
+        <img class="s2-bird s2-bird--a" src="assets/floating/swallow.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+        <img class="s2-bird s2-bird--b" src="assets/floating/swallow.png" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+
+        <!-- SEPARATE foreground fence (parallax layer) — same element + data-parallax so JS is unchanged -->
+        <div class="scene__fence parallax" data-parallax="0.22" aria-hidden="true">
+          <img class="scene__fence-img" src="assets/s2-fence.webp" alt="" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="scene__content scene__content--top scene__content--story">
+          <p class="eyebrow eyebrow--dark">THE CELLAR DOOR</p>
+          <h2 class="display-title">A&nbsp;hamlet. A&nbsp;hill. A&nbsp;cellar.</h2>
+          <p class="lede lede--dark">
+            A small Moldovan place where the vines grow above stone, and the wine keeps its own time.
+          </p>
+          <a class="btn btn--primary btn--lg" href="catalogue.html">
+            Browse the Wines
+            <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+        </div></div><!-- /.s2-stage /.s2-pin -->
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SECTION 3 — INTERIOR WINE CELLAR                     -->
+      <!-- ==================================================== -->
+      <section class="scene scene--cellar" id="scene-cellar" data-scene="3" aria-label="Interior wine cellar">
+        <div class="scene__cellar-bg" aria-hidden="true"></div>
+        <!-- Real client background (cellar + barrels) -->
+        <img class="scene__photo" src="assets/s3-bg.webp" alt="" loading="lazy" decoding="async" />
+        <div class="scene__veil scene__veil--cellar" aria-hidden="true"></div>
+        <div class="scene__glow" aria-hidden="true"></div>
+
+        <div class="scene__content scene__content--cellar">
+          <p class="eyebrow eyebrow--light">LIKE NO OTHERS</p>
+          <h2 class="display-title display-title--light"><span>Nothing added.</span><span>Nothing hurried.</span></h2>
+          <p class="lede lede--light">
+            Wild yeast. Whole grapes. Old vines. Patience. We do not correct what the year
+            gives — we let the cellar hold it.
+          </p>
+          <p class="lede lede--light">
+            Eight thousand bottles a year. Each one numbered before it leaves the stone.
+          </p>
+          <a class="btn btn--ghost-light btn--lg" href="catalogue.html">
+            SEE THE WINES
+            <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ SLIM FOOTER ============ -->
+    <footer class="site-footer" aria-label="Site footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <p class="site-footer__mark">CĂTUN</p>
+          <p class="site-footer__placeholder">Placeholder copy — replace at branding.</p>
+        </div>
+        <div class="site-footer__cols">
+          <div class="site-footer__col">
+            <p class="site-footer__head">Visit</p>
+            <p>Cellar &amp; tasting room</p>
+            <p>Open by appointment</p>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__head">Trade</p>
+            <p>Distribution enquiries</p>
+            <p>Restaurant program</p>
+          </div>
+          <div class="site-footer__col">
+            <p class="site-footer__head">Contact</p>
+            <p>hello@example.ro</p>
+            <p>@catun</p>
+          </div>
+        </div>
+      </div>
+      <p class="site-footer__legal">© <span id="footerYear">2026</span> CĂTUN · Placeholder build</p>
+    </footer>
+
+    <!-- Cinematic scroll-transition overlays (opacity driven by scroll-progress CSS vars set in script.js) -->
+    <div class="journey-fx" aria-hidden="true">
+      <div class="transition-haze"></div>
+      <div class="transition-doorway"></div>
+      <div class="transition-lightspill"></div>
+    </div>
+
+    <script src="script.js?v=f" defer></script>
+  </body>
+</html>
